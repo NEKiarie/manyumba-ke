@@ -56,7 +56,6 @@ const HouseContextProvider = ({ children }) => {
       return str.split(" ").includes("(any)");
     };
 
-    // console.log(isDefault(country))
 
     //get first value of price and parse it to number
     const minPrice = parseInt(price.split(" ")[0]);
@@ -120,7 +119,6 @@ const HouseContextProvider = ({ children }) => {
   }
 });
 
-    //console.log(newHouses);
     setTimeout(() => {
       return newHouses.length < 1 ? setHouses([]) : setHouses(newHouses);
       setLoading(false);
