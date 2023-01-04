@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 
+//import motion for Animation
+import { motion } from "framer-motion";
+
 //import context
 import { HouseContext } from "./HouseContext";
 
@@ -21,21 +24,30 @@ const HouseList = () => {
       <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
     );
   }
-   if(houses.length < 1) {
-    return <div className="text-center text-3xl text-gray-400 mt-48"> Sorry, nothing found</div>
-   }
+  if (houses.length < 1) {
+    return (
+      <div className="text-center text-3xl text-gray-400 mt-48">
+        {" "}
+        Sorry, nothing found
+      </div>
+    );
+  }
 
   return (
     <section className="mb-20">
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14">
-          {houses.map((house, index) => {
-            return (
+          {houses.map((house, index) => (
+            <motion.div
+              whileInView={{ opacity: 1 }}
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.5, type: "tween" }}
+            >
               <Link to={`/property/${house.id}`} key={index}>
                 <House house={house} />
               </Link>
-            );
-          })}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
