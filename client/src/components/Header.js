@@ -17,13 +17,13 @@ const Header = () => {
 
         <div className="flex items-center gap-6">
           <Link className="hover:text-violet-900 transition" to="">
-            Log In{" "}
+            Log In
           </Link>
           <Link
             className="bg-violet-700 hover: bg-violet-800 text-white px-4 py-3 rounded-lg transition"
             to=""
           >
-            Sign Up{" "}
+            Sign Up
           </Link>
         </div>
       </div>

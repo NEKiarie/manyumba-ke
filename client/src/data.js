@@ -69,7 +69,7 @@ export const housesData = [
     bathrooms: '3',
     surface: '4200 sq ft',
     year: '2016',
-    price: '110000',
+    price: ' Ksh 110,000',
     agent: {
       image: Agent1,
       name: 'Patricia Tullert',
@@ -90,7 +90,7 @@ export const housesData = [
     bathrooms: '3',
     surface: '4200 sq ft',
     year: '2016',
-    price: '140000',
+    price: ' Ksh 140,000',
     agent: {
       image: Agent2,
       name: 'Daryl Hawker',
@@ -111,7 +111,7 @@ export const housesData = [
     bathrooms: '3',
     surface: '4200 sq ft',
     year: '2016',
-    price: '170000',
+    price: ' Ksh 170,000',
     agent: {
       image: Agent3,
       name: 'Amado Smith',
