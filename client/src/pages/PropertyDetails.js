@@ -1,5 +1,6 @@
 import React from "react";
 
+
 import { housesData } from "../data";
 
 import { useParams } from "react-router-dom";
@@ -73,7 +74,7 @@ const PropertyDetails = () => {
               <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
-                placeholder="name"
+                placeholder="Name"
               />
               <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
@@ -83,16 +84,16 @@ const PropertyDetails = () => {
               <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
-                placeholder="email"
+                placeholder="Email"
               />
               <textarea
                 className="border border-gray-300 focus:border-violet-700 outline-none resize-none rounded w-full p-4 h-36 text-sm text-gray-400"
                 placeholder="Message"
                 defaultValue="Hello I am Interested in [Modern apartment]"
               ></textarea>
-              <div>
+              <div className="flex gap-4 mt-2">
                 <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition">
-                  SendMessage
+                  Send Message
                 </button>
                 <button className="border border-violet-700 text-violet-700 hover:border-violet-500 hover:text-violet-500 rounded p-4 text-sm w-full transition">
                   Call
