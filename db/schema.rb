@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_115850) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_07_091447) do
   create_table "bought_properties", force: :cascade do |t|
     t.integer "seller_id"
     t.integer "buyer_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_115850) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.integer "seller_id"
+    t.integer "user_id"
     t.string "location"
     t.integer "price"
     t.string "image_url"

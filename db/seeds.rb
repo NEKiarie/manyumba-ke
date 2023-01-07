@@ -33,65 +33,60 @@ end
 
 puts "Creating properties...🏡"
 Property.destroy_all
+puts "Getting all users who are sellers"
+sellers = User.joins(:profile).where(profiles: { role: 'Seller' })
+
 all_properties = [{
-    seller_id: 1,
+    user_id: sellers.sample.id,
     location: "Kiambu",
     price: 16000,
     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzI8lKOFjUtx-SEFtq_M3EA1pM8NOnKxjtKZxGs-cmKxAuZS20uKzYix_OSYPwq5mSEQ0&usqp=CAU",
     description: ""
 },
 {
-    seller_id: 2,
+    user_id: sellers.sample.id,
     location: "Westlands",
     price: 30000,
     image_url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfCGewHDEpFWJSiJ5rqkbdLdwigyBQXfn6l6kZsMqkQmO9tcSnTnTmT28B3-wBcebRHr0&usqp=CAU" ,
     description: " "
 },
 {
-    seller_id: 1,
+    user_id: sellers.sample.id,
     location: "Thika Road",
     price: 17000,
     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaVLk-jpjwZIaAGzbufINQBQhr6C7knDf6W6eUZr1Qw96pnag9W_3PXL-YmKoy___6lcc&usqp=CAU",
     description: ""
 },
 {
-    seller_id: 3,
+    user_id: sellers.sample.id,
     location: "Kiambu",
     price: 16000,
     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBRoyxz9LoOG3i-Rn6It78sgjKCd6VbrAPfg&usqp=CAU",
     description: "You’ll find tasteful updates throughout this recently renovated, stunning home. Schedule a tour today!" 
 },
 {
-    seller_id: 4,
+    user_id: sellers.sample.id,
     location: "Kilimani",
     price: 35000,
     image_url: "https://www.tysons.co.ke/wp-content/uploads/2019/10/mi-vida-tysons-limited-4.jpg",
     description: "" 
 },
 {
-    seller_id: 5,
+    user_id: sellers.sample.id,
     location: "Kitengela",
     price: 24000,
     image_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa1FGC98ls-738d2BZmgbcNAkckHOtaLu8pw&usqp=CAU" ,
     description:"This move-in ready home has been recently updated, including new windows that provide ample of natural light. Enjoy the shaded backyard or walk to the neighborhood park down the street." 
 },
 {
-    seller_id: 2,
+    user_id: sellers.sample.id,
     location: "Ngong Road",
     price: 20000,
     image_url:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK9ieIPfAzdkRsyQrL4qETVNuVzz3Wi97aO1f6-M6hkwPh3OUXb-i6_5-_oQmLEPHTWAQ&usqp=CAU" ,
     description: "This stunning two-story home is on a large lot in a hot neighborhood. From the open-concept kitchen and living space to the large shaded backyard, there is plenty of room for the whole family to enjoy. Recent updates include new carpeting upstairs and stainless appliances. Situated in a family-friendly neighborhood near a great park, this home is sure to go fast!"
 }]
 all_properties.length.times do |i|
-    new_property = all_properties[i]
-    Property.create(
-        seller_id: new_property[:seller_id],
-        location: new_property[:location],
-        price: new_property[:price],
-        image_url: new_property[:image_url],
-        description: new_property[:description]
-    )
+    new_property = all_properties[i]    
+    Property.create!(new_property)
 end
 puts "Done with Properties..."
-
-
