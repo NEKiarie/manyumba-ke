@@ -1,2 +1,2 @@
-class Payment < ApplicationRecord   
+class Payment < ApplicationRecord
 end
