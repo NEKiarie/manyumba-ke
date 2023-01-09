@@ -8,6 +8,6 @@ class Property < ApplicationRecord
 
     belongs_to :seller
 
-    belongs_to :payment
+    has_many :payment
     has_many :property_images
 end
