@@ -291,22 +291,70 @@ properties = Property.all
 
 puts "Creating 10 users👨.."
 User.destroy_all
+names = [
+    {
+        first_name: "Peter",
+        last_name: "Kamau",
+        user_name: "peter_kamau"
+    },
+    {
+        first_name: "George",
+        last_name: "Muturi",
+        user_name: "george_muturi"
+    },
+    {
+        first_name: "Elvis",
+        last_name: "Kiarie",
+        user_name: "elvis_kiarie"
+    },
+    {
+        first_name: "Tess",
+        last_name: "Yieke",
+        user_name: "tess_yieke"
+    },
+    {
+        first_name: "Jim",
+        last_name: "Munene",
+        user_name: "jim_munene"
+    },
+    {
+        first_name: "Hafsna",
+        last_name: "Nuh",
+        user_name: "hafsana_nuh"
+    },
+    {
+        first_name: "Steve",
+        last_name: "Otieno",
+        user_name: "steve_otieno"
+    },
+    {
+        first_name: "Solomon",
+        last_name: "Kitonyi",
+        user_name: "solomon_kitonyi"
+    },
+    {
+        first_name: "Anthony",
+        last_name: "Mwaniki",
+        user_name: "anthony_mwaniki"
+    },
+    {
+        first_name: "Festus",
+        last_name: "Mwaniki",
+        user_name: "festus_mwaniki"
+    }
+]
 
 10.times do |i|     
-    first_name = Faker::Name.first_name
-    last_name  =  Faker::Name.last_name  
-    user_name  = "#{first_name}_#{last_name}"  
+    user = names[i] 
     hash = BCrypt::Password.create("password")
-    new_user = {
-        user_name: user_name, 
-        first_name: first_name, 
-        last_name: last_name,        
-        password_digest: hash,
-        location_id: locations.sample.id,
-        admin: [true,false].sample 
-    }
-   #byebug
-    User.create(new_user)  
+    User.create(
+        user_name: user[:user_name], 
+        first_name: user[:first_name], 
+        last_name: user[:last_name],        
+        password_digest:hash,
+        location_id:locations.sample.id,
+        admin: [true,false].sample        
+    )  
 end
 puts "Done with users👨."
 
@@ -340,23 +388,27 @@ puts "Creating 10 Properties...."
 Property.destroy_all
 size = ["100 by 100", "100 by 50"]
 10.times do |i|
-    Property.create(
+    location = locations.sample
+    property = Property.create!(
         type_id: all_types.sample.id,
-        address: "", 
-        location_id: locations.sample.id,         
+        address: "#{location.county}, #{location.name}", 
+        location_id: location.id,         
         beds: (1..5).to_a.sample, 
         baths: (1..4).to_a.sample,     
         fore_closure: false,
-        price:(1500000...50000000).to_a.sample,
+        price:(1500000...5000000).to_a.sample,
         seller_id: sellers.sample.id,
         description: Faker::Lorem.paragraph,
         notes: Faker::Lorem.sentence,
         size: size.sample,
         image_url: "https://ssl.cdn-redfin.com/photo/45/bigphoto/928/OC22191928_1.jpg"
     )
+
 end
 puts "Done with Properties"
 properties = Property.all
+
+
 
 #######################################
 # Buyers
@@ -377,15 +429,20 @@ puts "Done with Buyers"
 
 #######################################
 # UserProperties
-#####################################
+#######################################
 puts "Creating user_properties..."
 UserProperty.destroy_all
-10.times do |i|      
-    UserProperty.create(       
+
+10.times do |i|   
+    p users.sample.id
+    p properties.sample.id
+    p Faker::Lorem.sentence 
+    user_property = UserProperty.create!(       
         property_id:properties.sample.id, 
         user_id:users.sample.id, 
         notes:Faker::Lorem.sentence               
-    )    
+    ) 
+    
 end
 puts "Done with user_properties"
 
@@ -393,7 +450,7 @@ puts "Done with user_properties"
 # property images
 #####################################
 puts "Creating Property Images..."
-property_images.destroy_all
+PropertyImage.destroy_all
 images = [
     "https://ssl.cdn-redfin.com/photo/45/bcsphoto/917/genBcs.SB22189917_3_0.jpg",
     "https://ssl.cdn-redfin.com/photo/45/mbphoto/928/genMid.OC22191928_11_1.jpg",
@@ -403,7 +460,7 @@ images = [
     "https://ssl.cdn-redfin.com/photo/45/bcsphoto/579/genBcs.IV22196579_1_1.jpg"
 ]
 10.times do |i|      
-    PropertyImage.create(
+    PropertyImage.create!(
         property_id: properties.sample.id, 
         image_url: images.sample
     )

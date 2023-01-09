@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    validates :username, presence: true, uniqueness: true
+    validates :user_name, presence: true, uniqueness: true
     validates :first_name, presence: true
 
     PASSWORD_REQUIREMENTS = /\A
