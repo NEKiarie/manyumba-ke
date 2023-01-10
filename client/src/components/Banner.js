@@ -17,16 +17,15 @@ const Banner = () => {
             Us.
           </h1>
           <p className="max-w-[480px] mb-8">
-            Powerful, self-serve product and growth analytics to help you
-            convert, engage and retain more.
-          </p>
+            Building a next-generation collaborative platform to connect Renters, Homeowners and Agents. Live the way you want. Beautiful homes, 
+            incredible locations. Pricing that makes sense </p>
         </div>
         {/* image */}
-        <div className="hidden flex-1 lg:flex justify-end items-end">
+        <div className="hidden flex-1 lg:flex justify items-end">
           <img className="rounded-br-[90px]" src={BannerImage} alt="" />
         </div>
       </div>
-      <Search />
+      {/* <Search /> */}
     </section>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import Logo from "../assets/img/logo.svg";
+
 
 const Header = () => {
   return (
@@ -10,20 +10,31 @@ const Header = () => {
         {/* Logo */}
 
         <Link to="/">
-          <img src={Logo} alt="" />
+        <h1 className="text-4xl lg:text-[60px] font-semibold leading-none mb-2">Manyumba-
+            <span className="text-violet-700">ke</span>
+          </h1>
         </Link>
+
+        <div className="flex items-center gap-6">
+          <Link className="hover:text-violet-900 transition text-[20px]" to="">
+            Properties
+          </Link>
+          <Link className="hover:text-violet-900 transition text-[20px]" to="">
+            Sellers
+          </Link>
+        </div>
 
         {/* Buttons */}
 
         <div className="flex items-center gap-6">
-          <Link className="hover:text-violet-900 transition" to="">
-            Log In
+        <Link className="hover:text-violet-900 transition text-[20px]" to="">
+            My profile
           </Link>
           <Link
             className="bg-violet-700 hover: bg-violet-800 text-white px-4 py-3 rounded-lg transition"
             to=""
           >
-            Sign Up
+            Log out
           </Link>
         </div>
       </div>
