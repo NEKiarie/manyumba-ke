@@ -346,8 +346,8 @@ names = [
 
 10.times do |i|     
     user = names[i] 
-    hash = BCrypt::Password.create("password")
-    User.create(
+    hash = BCrypt::Password.create("password")    
+    User.create!(
         user_name: user[:user_name], 
         first_name: user[:first_name], 
         last_name: user[:last_name],        
@@ -433,10 +433,8 @@ puts "Done with Buyers"
 puts "Creating user_properties..."
 UserProperty.destroy_all
 
-10.times do |i|   
-    p users.sample.id
-    p properties.sample.id
-    p Faker::Lorem.sentence 
+10.times do |i| 
+        
     user_property = UserProperty.create!(       
         property_id:properties.sample.id, 
         user_id:users.sample.id, 
