@@ -25,7 +25,7 @@ const Banner = () => {
           <img className="rounded-br-[90px]" src={BannerImage} alt="" />
         </div>
       </div>
-      {/* <Search /> */}
+      <Search />
     </section>
   );
 };

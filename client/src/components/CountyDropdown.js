@@ -9,7 +9,7 @@ import { Menu } from "@headlessui/react";
 //import house context
 import { HouseContext } from "./HouseContext";
 
-const CountryDropdown = () => {
+const CountyDropdown = () => {
   const { country, setCountry, countries } = useContext(HouseContext);
   // console.log(countries);
 
@@ -24,7 +24,7 @@ const CountryDropdown = () => {
         <RiMapPinLine className="dropdown-icon-primary" />
         <div>
           <div className="text-[15px] font-medium leading-tight">{country}</div>
-          <div className="text-[13px]">Select your place</div>
+          <div className="text-[13px]">Select your County</div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -51,4 +51,4 @@ const CountryDropdown = () => {
   );
 };
 
-export default CountryDropdown;
+export default CountyDropdown;
