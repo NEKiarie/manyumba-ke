@@ -44,6 +44,7 @@ const HouseList = () => {
               whileInView={{ opacity: 1 }}
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.5, type: "tween" }}
+              key={property.id}
             >
               <Link to={`/property/${property.id}`} key={property.id}>
                 <House property={property} />

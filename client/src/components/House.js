@@ -5,8 +5,9 @@ import { RiMapPinLine } from 'react-icons/ri'
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 
 const House = ({ property }) => {
-  const { imageUrl, type_id, location_id, address, beds, baths, size, price } =
+  const { image_url, type_id, location_id, address, beds, baths, size, price } =
     property;
+    
 
   return (
     <div
@@ -15,7 +16,7 @@ const House = ({ property }) => {
     >
       <img
         className="mb-8 rounded-tl-[90px] rounded-br-[90px]"
-        src={imageUrl}
+        src={image_url}
         alt=""
       />
       <div className="mb-4 flex gap-x-2 text-sm">

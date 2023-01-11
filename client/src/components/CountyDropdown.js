@@ -13,8 +13,7 @@ const CountyDropdown = () => {
 const { selectedCounty,
   setSelectedCounty, 
     //countries,
-   locations } = useContext(HouseContext);
-  console.log(selectedCounty);  
+   locations } = useContext(HouseContext);    
   const { county } = locations
 
   const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +39,7 @@ const { selectedCounty,
         {locations.map(({county, id}) => {
           return (
             <Menu.Item
-              onClick={() => {
-                console.log(county)
+              onClick={() => {                
                 setSelectedCounty(county)
               }}
               className="cursor-pointer hover: text-violet-700 transition"
