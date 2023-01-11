@@ -10,11 +10,14 @@ import { Menu } from "@headlessui/react";
 import { HouseContext } from "./HouseContext";
 
 const CountyDropdown = () => {
-  const { country, setCountry, countries } = useContext(HouseContext);
-  // console.log(countries);
+const { selectedCounty,
+  setSelectedCounty, 
+    //countries,
+   locations } = useContext(HouseContext);
+  console.log(selectedCounty);  
+  const { county } = locations
 
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <Menu as="div" className="dropdown relative">
       <Menu.Button
@@ -23,8 +26,8 @@ const CountyDropdown = () => {
       >
         <RiMapPinLine className="dropdown-icon-primary" />
         <div>
-          <div className="text-[15px] font-medium leading-tight">{country}</div>
-          <div className="text-[13px]">Select your County</div>
+          <div className="text-[15px] font-medium leading-tight">{county}</div>
+          <div className="text-[13px]">{!selectedCounty ? "Select your County" : selectedCounty}</div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -34,15 +37,18 @@ const CountyDropdown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu">
-        {countries.map((country, index) => {
+        {locations.map(({county, id}) => {
           return (
             <Menu.Item
-              onClick={() => setCountry(country)}
+              onClick={() => {
+                console.log(county)
+                setSelectedCounty(county)
+              }}
               className="cursor-pointer hover: text-violet-700 transition"
               as="li"
-              key={index}
+              key={id}
             >
-              {country}
+              {county}
             </Menu.Item>
           );
         })}
