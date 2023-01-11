@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
+import axios from "axios";
 
 //import data
 import { housesData } from "../data";
@@ -7,43 +8,93 @@ import { housesData } from "../data";
 export const HouseContext = createContext();
 
 const HouseContextProvider = ({ children }) => {
+  const [locations, setLocations] = useState([])
   const [houses, setHouses] = useState(housesData);
-  const [country, setCountry] = useState("Location(any)");
+  const [selectedCounty, setSelectedCounty] = useState(null);
   const [countries, setCountries] = useState([]);
-  const [property, setProperty] = useState("Property type(any)");
+  const [selectedType, setSelectedType] = useState({
+    id: 0,
+    description: ""
+  });
+  const [types, setTypes] = useState([]);
   const [properties, setProperties] = useState([]);
   const [price, setPrice] = useState("Price range(any)");
   const [loading, setLoading] = useState(false);
 
-  //return all countries
+
+  //fetch all locations
+
   useEffect(() => {
-    const allCountries = houses.map((house) => {
-      return house.country;
-    });
+    const locations = axios.get("/locations",{
+      "Content-Type": "application/json"
+    })    
+    .then((response) => {
+      const locations = ["Location (any)", ...response.data];
+      setLocations(locations)
+    })
 
-    //Remove duplicates
-    const uniqueCountries = ["Location (any)", ...new Set(allCountries)];
+  }, [])
 
-    // console.log(uniqueCountries)
 
-    //set countries state
-    setCountries(uniqueCountries);
-  }, []);
+    //fetch all properties
+
+    useEffect(() => {
+      const properties = axios.get("/properties",{
+        "Content-Type": "application/json"
+      })    
+      .then((response) => {
+        const properties = ["Location (any)", ...response.data];
+        setProperties(properties)
+      })
+      
+  
+    }, [])
+
+   //Fetching types
+
+    useEffect(() => {
+      const locations = axios.get("/types",{
+        "Content-Type": "application/json"
+      })    
+      .then((response) => {
+        const types = ["Type (any)", ...response.data];
+        setTypes(types)
+      })
+  
+    }, [])
+  
+    //console.log(properties)
+    //console.log(locations)
+
+  //return all countries
+  // useEffect(() => {
+  //   const allCountries = houses.map((house) => {
+  //     return house.country;
+  //   });
+
+  //   //Remove duplicates
+  //   const uniqueCountries = ["Location (any)", ...new Set(allCountries)];
+
+  //   // console.log(uniqueCountries)
+
+  //   //set countries state
+  //   setCountries(uniqueCountries);
+  // }, []);
 
   //return all properties
-  useEffect(() => {
-    const allProperties = houses.map((house) => {
-      return house.type;
-    });
+  // useEffect(() => {
+  //   const allProperties = houses.map((house) => {
+  //     return house.type;
+  //   });
 
-    //Remove duplicates
-    const uniqueProperties = ["Location (any)", ...new Set(allProperties)];
+  //   //Remove duplicates
+  //   const uniqueProperties = ["Location (any)", ...new Set(allProperties)];
 
-    // console.log(uniqueProperties)
+  //   // console.log(uniqueProperties)
 
-    //set properties state
-    setProperties(uniqueProperties);
-  }, []);
+  //   //set properties state
+  //   setProperties(uniqueProperties);
+  // }, []);
 
   const handleClick = () => {
     //console.log(country, property, price)
@@ -70,7 +121,7 @@ const HouseContextProvider = ({ children }) => {
       //if all values are selected
       if (
         (house,
-        country === country &&
+        county === county &&
           house.type === property &&
           housePrice >= minPrice &&
           housePrice <= maxPrice)
@@ -79,13 +130,13 @@ const HouseContextProvider = ({ children }) => {
       }
 
       //if all values are default
-      if((isDefault(country) && isDefault(property) && isDefault(price))) {
+      if((isDefault(county) && isDefault(property) && isDefault(price))) {
         return house;
       }
 
       //if country is not default
       if(!isDefault(country) && isDefault(property) && isDefault(price)) {
-        return house.country === country;
+        return house.county === county;
       }
 
       //if property is not default
@@ -128,11 +179,12 @@ const HouseContextProvider = ({ children }) => {
   return (
     <HouseContext.Provider
       value={{
-        country,
-        setCountry,
+        selectedCounty,
+        setSelectedCounty,
         countries,
-        property,
-        setProperty,
+        selectedType,
+        setSelectedType,
+        types,
         properties,
         price,
         setPrice,
@@ -140,6 +192,7 @@ const HouseContextProvider = ({ children }) => {
         loading,
         handleClick,
         loading,
+        locations
       }}
     >
       {children}

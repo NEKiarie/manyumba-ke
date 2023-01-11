@@ -10,7 +10,7 @@ import { Menu } from "@headlessui/react";
 import { HouseContext } from "./HouseContext";
 
 const PropertyDropdown = () => {
-  const { property, setProperty, properties } = useContext(HouseContext);
+  const { selectedType, setSelectedType, types } = useContext(HouseContext);
   // console.log(properties);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +24,9 @@ const PropertyDropdown = () => {
         <RiHome5Line className="dropdown-icon-primary" />
         <div>
           <div className="text-[15px] font-medium leading-tight">
-            {property}
+            {selectedType.description}
           </div>
-          <div className="text-[13px]">Select your place</div>
+          <div className="text-[13px]">"Select your place"</div>
         </div>
         {isOpen ? (
           <RiArrowUpSLine className="dropdown-icon-secondary" />
@@ -36,15 +36,15 @@ const PropertyDropdown = () => {
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu">
-        {properties.map((property, index) => {
+        {types.map((type, index) => {
           return (
             <Menu.Item
-              onClick={() => setProperty(property)}
+              onClick={() => setSelectedType(type)}
               className="cursor-pointer hover: text-violet-700 transition"
               as="li"
-              key={index}
+              key={type.id}
             >
-              {property}
+              {type.description}
             </Menu.Item>
           );
         })}
