@@ -1,6 +1,6 @@
 import React from "react";
 
-import BannerImage from "../assets/img/house-banner.png";
+import BannerImage from "../assets/img/Banner.jpg";
 
 import Search from "../components/Search";
 
@@ -18,11 +18,11 @@ const Banner = () => {
           </h1>
           <p className="max-w-[480px] mb-8">
             Building a next-generation collaborative platform to connect Renters, Homeowners and Agents. Live the way you want. Beautiful homes, 
-            incredible locations. Pricing that makes sense </p>
+            incredible locations. Pricing that makes sense. </p>
         </div>
         {/* image */}
-        <div className="hidden flex-1 lg:flex justify items-end mr-8 bg-violet-800 rounded-tl-[90px] rounded-br-[90px]">
-          <img className="rounded-br-[90px]" src={BannerImage} alt="" />
+        <div className="hidden flex-1 lg:flex justify items-end mr-8 rounded-tl-[90px] rounded-br-[90px]">
+          <img className="rounded-br-[90px] rounded-tl-[90px] rounded-bl-[10px] rounded-tr-[10px]" src={BannerImage} alt="" />
         </div>
       </div>
       <Search />
