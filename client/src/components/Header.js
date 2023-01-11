@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="py-6 mb-12 border-b">
+    <header className="py-6 mb-12">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
 
@@ -15,14 +15,6 @@ const Header = () => {
           </h1>
         </Link>
 
-        <div className="flex items-center gap-6">
-          <Link className="hover:text-violet-900 transition text-[20px]" to="">
-            Properties
-          </Link>
-          <Link className="hover:text-violet-900 transition text-[20px]" to="">
-            Sellers
-          </Link>
-        </div>
 
         {/* Buttons */}
 
@@ -31,7 +23,7 @@ const Header = () => {
             My profile
           </Link>
           <Link
-            className="bg-violet-700 hover: bg-violet-800 text-white px-4 py-3 rounded-lg transition"
+            className="bg-violet-700 hover: bg-violet-800 text-white px-8 py-3 rounded-lg transition"
             to=""
           >
             Log out

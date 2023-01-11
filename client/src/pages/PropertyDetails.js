@@ -66,7 +66,7 @@ const PropertyDetails = () => {
               <div>
                 <div>{house.agent.name}</div>
                 <Link to="" className="text-violet-700 text-sm">
-                  View Listings
+                  View Seller Details
                 </Link>
               </div>
             </div>
