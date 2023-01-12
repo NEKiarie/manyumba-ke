@@ -85,7 +85,7 @@ puts "Done with Counties"
 #####################################
 puts "Creating types...🏡"
 Type.destroy_all
-types = ["Apartment","Mansionette","Multi-family Home","Villas"]
+types = ["Apartment","Mansionette"]
 types.length.times do |i|
     type = types[i]
     Type.create(
