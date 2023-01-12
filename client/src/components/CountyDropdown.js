@@ -18,10 +18,10 @@ const { selectedCounty,
 
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Menu as="div" className="dropdown relative">
+    <Menu as="div" className="dropdown relative" >
       <Menu.Button
         onClick={() => setIsOpen(!isOpen)}
-        className="dropdown-btn w-full text-left"
+        className="dropdown-btn w-full text-left"       
       >
         <RiMapPinLine className="dropdown-icon-primary" />
         <div>
@@ -36,7 +36,8 @@ const { selectedCounty,
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu">
-        {locations.map(({county, id}) => {
+        {locations.map((property, index) => {  
+              
           return (
             <Menu.Item
               onClick={() => {                
@@ -44,7 +45,7 @@ const { selectedCounty,
               }}
               className="cursor-pointer hover: text-violet-700 transition"
               as="li"
-              key={id}
+              key={property.id ? property.id : Math.random() + 1}
             >
               {county}
             </Menu.Item>

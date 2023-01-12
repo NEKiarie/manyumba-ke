@@ -37,12 +37,12 @@ const PropertyDropdown = () => {
 
       <Menu.Items className="dropdown-menu">
         {types.map((type, index) => {
-          return (
+          return ( 
             <Menu.Item
               onClick={() => setSelectedType(type)}
               className="cursor-pointer hover: text-violet-700 transition"
               as="li"
-              key={type.id}
+              key={type.id ? type.id : Math.random() + 1}
             >
               {type.description}
             </Menu.Item>

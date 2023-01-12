@@ -3,8 +3,6 @@ import React, { useContext } from "react";
 //import components
 import CountyDropdown from "./CountyDropdown";
 import PropertyDropdown from "./PropertyDropdown";
-// import PriceRangeDropdown from "./PriceRangeDropdown";
-// import  LocationInput  from "./LocationInput";
 
 //import icons
 import { RiSearch2Line } from "react-icons/ri";
@@ -15,6 +13,7 @@ import { HouseContext } from "./HouseContext";
 const Search = () => {
 
 const {handleClick} = useContext(HouseContext)
+
   return (
     <div className="px-[30px] mt-20 mb-20 py-6 max-w-[1150px] mx-auto flex flex-col 
     lg:flex-row justify-between gap-4 lg:gap-x-3 relative lg:-top-4 
