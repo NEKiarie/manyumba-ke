@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 //import icons
 import { RiHome5Line, RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
@@ -29,9 +29,9 @@ const PropertyDropdown = () => {
           <div className="text-[13px]">"Select your place"</div>
         </div>
         {isOpen ? (
-          <RiArrowUpSLine className="dropdown-icon-secondary" />
+          <RiArrowUpSLine className="dropdown-icon-secondary" key={1} />
         ) : (
-          <RiArrowDownSLine className="dropdown-icon-secondary" />
+          <RiArrowDownSLine className="dropdown-icon-secondary" key={2} />
         )}
       </Menu.Button>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 //import motion for Animation
 import { motion } from "framer-motion";
@@ -19,7 +19,7 @@ const HouseList = () => {
   const { loading, properties } = useContext(HouseContext); 
   
 
-  // if loading is true
+  // //if loading true
   // if (loading) {
   //   return (
   //     <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
@@ -44,7 +44,7 @@ const HouseList = () => {
               whileInView={{ opacity: 1 }}
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.5, type: "tween" }}
-              key={property.id}
+              key={index}
             >
               <Link to={`/property/${property.id}`} key={property.id}>
                 <House property={property} />

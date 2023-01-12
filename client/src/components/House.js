@@ -1,12 +1,37 @@
-import React from "react";
+import React,{ useState, useEffect} from "react";
+import axios from "axios"
 import { RiMapPinLine } from 'react-icons/ri'
 
 //import icons
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 
 const House = ({ property }) => {
+  const [location, setLocation] = useState({})
+  const [type, setType] = useState({})
   const { image_url, type_id, location_id, address, beds, baths, size, price } =
     property;
+    
+    //fetch a particular location
+    useEffect(() => {
+      axios.get(`/locations/${location_id}`,{
+        "Content-Type": "application/json"
+      })        
+      .then((response) => {        
+        setLocation(response.data)
+      })    
+
+    },[location_id])
+
+    //fetch a particular type
+    useEffect(() => {
+      axios.get(`/types/${type_id}`,{
+        "Content-Type": "application/json"
+      })        
+      .then((response) => {        
+        setType(response.data)
+      })    
+
+    },[type_id])
     
 
   return (
@@ -20,9 +45,9 @@ const House = ({ property }) => {
         alt=""
       />
       <div className="mb-4 flex gap-x-2 text-sm">
-        <div className="bg-green-500 rounded-full text-white px-3">{type_id}</div>
+        <div className="bg-green-500 rounded-full text-white px-3">{type.description}</div>
         <div className="bg-violet-500 rounded-full text-white px-3">
-          {location_id}
+          {location.county}
         </div>
       </div>
       <div className="text-lg font-semibold max-w-[260px] flex">
