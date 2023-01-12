@@ -2,22 +2,20 @@ import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 
 //import data
-import { housesData } from "../data";
+//import { housesData } from "../data";
 
 //create context
 export const HouseContext = createContext();
 
 const HouseContextProvider = ({ children }) => {
   const [locations, setLocations] = useState([])
-  const [houses, setHouses] = useState(housesData);
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [selectedType, setSelectedType] = useState({
     id: 0,
     description: ""
   });
   const [types, setTypes] = useState([]);
-  const [properties, setProperties] = useState([]);
-  const [price, setPrice] = useState("Price range(any)");
+  const [properties, setProperties] = useState([]); 
   const [loading, setLoading] = useState(false);
 
 
@@ -38,10 +36,9 @@ const HouseContextProvider = ({ children }) => {
     //fetch all properties
 
     useEffect(() => {
-      const properties = axios.get("/properties",{
+      axios.get("/properties",{
         "Content-Type": "application/json"
-      })
-      .then(response => JSON.parse(response))    
+      })        
       .then((response) => {
         const properties = ["Location (any)", ...response.data];
         setProperties(properties)
@@ -184,10 +181,7 @@ const HouseContextProvider = ({ children }) => {
         selectedType,
         setSelectedType,
         types,
-        properties,
-        price,
-        setPrice,
-        houses,
+        properties,       
         loading,
         // handleClick,
         loading,
