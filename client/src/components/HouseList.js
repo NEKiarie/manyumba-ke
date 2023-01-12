@@ -39,7 +39,7 @@ const HouseList = () => {
     <section className="mb-20">
       <div className="container mx-auto mt-20 ">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14">
-          {properties.map((property, index) => (
+          {properties.slice(1).map((property, index) => (
             <motion.div
               whileInView={{ opacity: 1 }}
               whileHover={{ scale: 1.1 }}
