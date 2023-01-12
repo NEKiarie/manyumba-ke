@@ -3,4 +3,5 @@ class PropertySerializer < ActiveModel::Serializer
   :size, :image_url, :notes, :fore_closure, :price, :seller_id, :description
 
   belongs_to :location
+ 
 end

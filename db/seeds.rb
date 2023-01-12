@@ -26,28 +26,33 @@ counties = [
     {
         "name": "Kiambu",
         "code": 2,
-        "capital": "Juja"
+        "capital": "Eden Ville Estate"
     }, 
     {
         "name": "Kiambu",
         "code": 3,
-        "capital": "Thika Greens"
+        "capital": "Hidden Creek Estate"
     }, 
     {
         "name": "Nairobi",
         "code": 4,
-        "capital": "UpperHill"
+        "capital": "Muthaiga"
 
     }, 
     {
         "name": "Kiambu",
         "code": 5,
-        "capital": "Ruiru"
+        "capital": "Runda Palm Gardens Estate"
     }, 
     {
         "name": "Nairobi",
         "code": 6,
         "capital": "Lavington"
+    }, 
+    {
+        "name": "Kiambu",
+        "code": 8,
+        "capital": "Migaa Golf Estate"
     }, 
     {
         "name": "Nairobi",
@@ -56,13 +61,8 @@ counties = [
     }, 
     {
         "name": "Kiambu",
-        "code": 8,
-        "capital": "Runda"
-    }, 
-    {
-        "name": "Kiambu",
         "code": 9,
-        "capital": "Ridgeways"
+        "capital": "Runda Paradise 1 Estate"
     }, 
     {
         "name": "Nairobi",

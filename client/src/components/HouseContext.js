@@ -38,7 +38,7 @@ const HouseContextProvider = ({ children }) => {
     useEffect(() => {
       axios.get("/properties",{
         "Content-Type": "application/json"
-      })        
+      })      
       .then((response) => {
         const properties = ["Location (any)", ...response.data];
         setProperties(properties)

@@ -22,7 +22,7 @@ const House = ({ property }) => {
 
     },[location_id])
 
-    //fetch a particular type
+    // //fetch a particular type
     useEffect(() => {
       axios.get(`/types/${type_id}`,{
         "Content-Type": "application/json"
