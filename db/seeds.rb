@@ -19,239 +19,55 @@ puts "Planting 🌱..."
 puts "Creating Counties...."
 counties = [
     {
-        "name": "Mombasa",
+        "name": "Nairobi",
         "code": 1,
-        "capital": "Mombasa City"
-    }, 
-    {
-        "name": "Kwale",
-        "code": 2,
-        "capital": "Kwale"
-    }, 
-    {
-        "name": "Kilifi",
-        "code": 3,
-        "capital": "Kilifi"
-    }, 
-    {
-        "name": "Tana River",
-        "code": 4,
-        "capital": "Hola"
-
-    }, 
-    {
-        "name": "Lamu",
-        "code": 5,
-        "capital": "Lamu"
-    }, 
-    {
-        "name": "Taita-Taveta",
-        "code": 6,
-        "capital": "Voi"
-    }, 
-    {
-        "name": "Garissa",
-        "code": 7,
-        "capital": "Garissa"
-    }, 
-    {
-        "name": "Wajir",
-        "code": 8,
-        "capital": "Wajir"
-    }, 
-    {
-        "name": "Mandera",
-        "code": 9,
-        "capital": "Mandera"
-    }, 
-    {
-        "name": "Marsabit",
-        "code": 10,
-        "capital": "Marsabit"
-    }, 
-    {
-        "name": "Isiolo",
-        "code": 11,
-        "capital": "Isiolo"
-    }, 
-    {
-        "name": "Meru",
-        "code": 12,
-        "capital": "Meru"
-    }, 
-    {
-        "name": "Tharaka-Nithi",
-        "code": 13,
-        "capital": "Chuka"
-    }, 
-    {
-        "name": "Embu",
-        "code": 14,
-        "capital": "Embu"
-    }, 
-    {
-        "name": "Kitui",
-        "code": 15,
-        "capital": "Kitui"
-    },
-    {
-        "name": "Machakos",
-        "code": 16,
-        "capital": "Machakos"
-    }, 
-    {
-        "name": "Makueni",
-        "code": 17,
-        "capital": "Wote"
-    }, 
-    {
-        "name": "Nyandarua",
-        "code": 18,
-        "capital": "Ol Kalou"
-    }, 
-    {
-        "name": "Nyeri",
-        "code": 19,
-        "capital": "Nyeri"
-    }, 
-    {
-        "name": "Kirinyaga",
-        "code": 20,
-        "capital": "Kerugoya/Kutus"
-    }, 
-    {
-        "name": "Murang'a",
-        "code": 21,
-        "capital": "Murang'a"
+        "capital": "Karen"
     }, 
     {
         "name": "Kiambu",
-        "code": 22,
-        "capital": "Kiambu"
+        "code": 2,
+        "capital": "Juja"
     }, 
     {
-        "name": "Turkana",
-        "code": 23,
-        "capital": "Lodwar"
-    }, 
-    {
-        "name": "West Pokot",
-        "code": 24,
-        "capital": "Kapenguria"
-    }, 
-    {
-        "name": "Samburu",
-        "code": 25,
-        "capital": "Maralal"
-    }, 
-    {
-        "name": "Trans-Nzoia",
-        "code": 26,
-        "capital": "Kitale"
-    }, 
-    {
-        "name": "Uasin Gishu",
-        "code": 27,
-        "capital": "Eldoret"
-    }, 
-    {
-        "name": "Elgeyo-Marakwet",
-        "code": 28,
-        "capital": "Iten"
-    }, 
-    {
-        "name": "Nandi",
-        "code": 29,
-        "capital": "Kapsabet"
-    }, 
-    {
-        "name": "Baringo",
-        "code": 30,
-        "capital": "Kabarnet"
-    }, 
-    {
-        "name": "Laikipia",
-        "code": 31,
-        "capital": "Rumuruti"
-    }, 
-    {
-        "name": "Nakuru",
-        "code": 32,
-        "capital": "Nakuru"
-    }, 
-    {
-        "name": "Narok",
-        "code": 33,
-        "capital": "Narok"
-    },
-    {
-        "name": "Kajiado",
-        "code": 34
-    }, 
-    {
-        "name": "Kericho",
-        "code": 35,
-        "capital": "Kericho"
-    }, 
-    {
-        "name": "Bomet",
-        "code": 36,
-        "capital": "Bomet"
-    }, 
-    {
-        "name": "Kakamega",
-        "code": 37,
-        "capital": "Kakamega"
-    }, 
-    {
-        "name": "Vihiga",
-        "code": 38,
-        "capital": "Vihiga"
-    }, 
-    {
-        "name": "Bungoma",
-        "code": 39,
-        "capital": "Bungoma"
-    }, 
-    {
-        "name": "Busia",
-        "code": 40,
-        "capital": "Busia"
-    }, 
-    {
-        "name": "Siaya",
-        "code": 41,
-        "capital": "Siaya"
-    }, 
-    {
-        "name": "Kisumu",
-        "code": 42,
-        "capital": "Kisumu"
-    }, 
-    {
-        "name": "Homa Bay",
-        "code": 43,
-        "capital": "Homa Bay"
-    }, 
-    {
-        "name": "Migori",
-        "code": 44,
-        "capital": "Migori"
-    }, 
-    {
-        "name": "Kisii",
-        "code": 45,
-        "capital": "Kisii"
-    }, 
-    {
-        "name": "Nyamira",
-        "code": 46,
-        "capital": "Nyamira"
+        "name": "Kiambu",
+        "code": 3,
+        "capital": "Thika Greens"
     }, 
     {
         "name": "Nairobi",
-        "code": 47,
-        "capital": "Nairobi City"
+        "code": 4,
+        "capital": "UpperHill"
+
+    }, 
+    {
+        "name": "Kiambu",
+        "code": 5,
+        "capital": "Ruiru"
+    }, 
+    {
+        "name": "Nairobi",
+        "code": 6,
+        "capital": "Lavington"
+    }, 
+    {
+        "name": "Nairobi",
+        "code": 7,
+        "capital": "Kileleshwa"
+    }, 
+    {
+        "name": "Kiambu",
+        "code": 8,
+        "capital": "Runda"
+    }, 
+    {
+        "name": "Kiambu",
+        "code": 9,
+        "capital": "Ridgeways"
+    }, 
+    {
+        "name": "Nairobi",
+        "code": 10,
+        "capital": "Kilimani"
     }
 ]
 Location.destroy_all
@@ -391,7 +207,7 @@ size = ["100 by 100", "100 by 50"]
     location = locations.sample
     property = Property.create!(
         type_id: all_types.sample.id,
-        address: "#{location.county}, #{location.name}", 
+        address: "#{location.name}", 
         location_id: location.id,         
         beds: (1..5).to_a.sample, 
         baths: (1..4).to_a.sample,     
@@ -401,7 +217,7 @@ size = ["100 by 100", "100 by 50"]
         description: Faker::Lorem.paragraph,
         notes: Faker::Lorem.sentence,
         size: size.sample,
-        image_url: "https://ssl.cdn-redfin.com/photo/45/bigphoto/928/OC22191928_1.jpg"
+        image_url: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG91c2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     )
 
 end

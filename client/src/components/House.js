@@ -11,11 +11,11 @@ const House = ({ property }) => {
 
   return (
     <div
-      className="bg-white shadow-1 p-5 rounded-lg rounded-tl-[90px] w-full max-w-[352px] mx-auto cursor-pointer
+      className="bg-white shadow-1 p-5 rounded-lg rounded-tl-[70px] w-full max-w-[352px] mx-auto cursor-pointer
     hover:shadow-2xl transition"
     >
       <img
-        className="mb-8 rounded-tl-[90px] rounded-br-[90px]"
+        className="mb-9 rounded-tl-[70px] rounded-br-[70px]"
         src={image_url}
         alt=""
       />
@@ -47,7 +47,7 @@ const House = ({ property }) => {
           <div>{size}</div>
         </div>
       </div>
-      <div className="text-lg font-semibold text-violet-600 mb-4 ">{price}</div>
+      <div className="text-lg font-semibold text-violet-600 mb-4 ">Ksh {price}</div>
     </div>
   );
 };
