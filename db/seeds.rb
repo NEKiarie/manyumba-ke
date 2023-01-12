@@ -68,7 +68,28 @@ counties = [
         "name": "Nairobi",
         "code": 10,
         "capital": "Kilimani"
+    },
+    {
+        "name": "Nairobi",
+        "code": 11,
+        "capital": "Mountain-view"
+    },
+    {
+        "name": "Nairobi",
+        "code": 12,
+        "capital": "SpringValley"
+    },
+    {
+        "name": "Nairobi",
+        "code": 13,
+        "capital": "Kitusuru"
+    },
+    {
+        "name": "Nairobi",
+        "code": 14,
+        "capital": "Westlands"
     }
+
 ]
 Location.destroy_all
 counties.length.times do |i|
@@ -220,7 +241,11 @@ image_url = [
 "https://thumbs.dreamstime.com/b/holiday-bungalows-kenya-swimming-pool-outside-traditional-makuti-roof-against-blue-skies-77084950.jpg",
 "https://thumbs.dreamstime.com/b/town-voi-panorama-kenya-surrounding-nature-east-africa-84419476.jpg",
 "https://thumbs.dreamstime.com/b/stone-house-plants-flowers-located-kenya-sunny-day-40921299.jpg",
-"https://thumbs.dreamstime.com/b/stone-house-plants-flowers-located-kenya-sunny-day-40919492.jpg"
+"https://thumbs.dreamstime.com/b/stone-house-plants-flowers-located-kenya-sunny-day-40919492.jpg",
+"https://thumbs.dreamstime.com/b/house-african-homes-palm-trees-shroud-kenya-41375705.jpg",
+"https://thumbs.dreamstime.com/b/african-house-tipical-villa-kenya-88647179.jpg",
+
+
 ]
 10.times do |i|
     location = locations.sample
