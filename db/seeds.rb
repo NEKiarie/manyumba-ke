@@ -1,7 +1,7 @@
-# # This file should contain all the record creation needed to seed the database with its default values.
-# # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-# #
-# # Examples:
+# # # This file should contain all the record creation needed to seed the database with its default values.
+# # # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# # #
+# # # Examples:
 # #
 # #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 # #   Character.create(name: "Luke", movie: movies.first)
@@ -203,6 +203,25 @@ sellers = Seller.all
 puts "Creating 10 Properties...."
 Property.destroy_all
 size = ["100 by 100", "100 by 50"]
+image_url = [
+"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=692&q=80",
+"https://images.unsplash.com/photo-1602941525421-8f8b81d3edbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+"https://images.unsplash.com/photo-1600563438938-a9a27216b4f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+"https://images.unsplash.com/photo-1555636222-cae831e670b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=877&q=80",
+"https://images.unsplash.com/photo-1600047509782-20d39509f26d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=701&q=80",
+"https://images.unsplash.com/photo-1605276373954-0c4a0dac5b12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
+"https://images.unsplash.com/photo-1602941525346-b707b1cbe7fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=861&q=80",
+"https://thumbs.dreamstime.com/z/beautiful-house-kenya-karen-blixsen-41019413.jpg",
+"https://thumbs.dreamstime.com/b/apartment-house-beautiful-entrance-porch-flower-bed-apartment-house-beautiful-entrance-porch-flower-bed-111319201.jpg",
+"https://thumbs.dreamstime.com/b/modern-residential-house-africa-fence-accommodation-kenya-magnificent-cityscape-175586684.jpg",
+"https://thumbs.dreamstime.com/b/loldia-house-19163567.jpg",
+"https://thumbs.dreamstime.com/b/holiday-bungalows-kenya-swimming-pool-outside-traditional-makuti-roof-against-blue-skies-77084950.jpg",
+"https://thumbs.dreamstime.com/b/town-voi-panorama-kenya-surrounding-nature-east-africa-84419476.jpg",
+"https://thumbs.dreamstime.com/b/stone-house-plants-flowers-located-kenya-sunny-day-40921299.jpg",
+"https://thumbs.dreamstime.com/b/stone-house-plants-flowers-located-kenya-sunny-day-40919492.jpg"
+]
 10.times do |i|
     location = locations.sample
     property = Property.create!(
@@ -217,7 +236,8 @@ size = ["100 by 100", "100 by 50"]
         description: Faker::Lorem.paragraph,
         notes: Faker::Lorem.sentence,
         size: size.sample,
-        image_url: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG91c2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+        image_url: image_url.sample
+        # image_url: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG91c2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
     )
 
 end
