@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { RiMapPinLine } from "react-icons/ri";
 
+//import icons
+import { ImSpinner2 } from "react-icons/im";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
+import { HouseContext } from "../components/HouseContext";
+
 const PropertyDetails = () => {
-  const [property, setProperty] = useState({});
-  const { id } = useParams();
+  const { loading, properties } = useContext(HouseContext)
+  let { id } = useParams();
+  id = Number(id)
 
-  useEffect(() => {
-    axios
-      .get(`/properties/${id}`, {
-        "Content-Type": "application/json",
-      })
-      .then((response) => {
-        setProperty(response.data);
-      });
-  }, [id]);
+  if (loading.properties) {
+    return (
+      <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
+    );
+  }
 
-  // console.log(property)
+  const property = properties.find(property => property.id === id) 
   const newLocal = "bg-green-500";
 
   return (
@@ -37,14 +38,14 @@ const PropertyDetails = () => {
           </div>
           <div className="mb-4 lg:mb-0 flex gap-x-2 text-sm">
             <div className="bg-green-500 text-white px-3 rounded-full">
-              {property.type_id}
+              {property.type.description}
             </div>
             <div className="bg-violet-500 text-white px-3 rounded-full">
-              {property.location_id}
+              {property.location.county}
             </div>
           </div>
           <div className="text-3xl font-semibold text-violet-500">
-            Ksh {property.price}.
+            Ksh {property.price}
           </div>
         </div>
         <div className="flex flex-col item-start gap-8 lg:flex-row">

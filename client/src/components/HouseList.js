@@ -20,19 +20,19 @@ const HouseList = () => {
   
 
   // //if loading true
-  // if (loading) {
-  //   return (
-  //     <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
-  //   );
-  // }
-  // if (houses.length < 1) {
-  //   return (
-  //     <div className="text-center text-3xl text-gray-400 mt-48">
-  //       {" "}
-  //       Sorry, nothing found
-  //     </div>
-  //   );
-  // }
+  if (loading.properties && loading.types && loading.locations) {
+    return (
+      <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
+    );
+  }
+  if (properties.length < 1) {
+    return (
+      <div className="text-center text-3xl text-gray-400 mt-48">
+        {" "}
+        Sorry, nothing found
+      </div>
+    );
+  }
 
 
   return (
