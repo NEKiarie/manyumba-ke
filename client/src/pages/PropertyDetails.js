@@ -5,25 +5,29 @@ import { RiMapPinLine } from "react-icons/ri";
 
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const PropertyDetails = () => {
-  const [property, setProperty] = useState({})
+  const [property, setProperty] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/properties/${id}`,{
-      "Content-Type": "application/json"
-    })        
-    .then((response) => {        
-      setProperty(response.data)
-    })    
-  },[id])
+    axios
+      .get(`/properties/${id}`, {
+        "Content-Type": "application/json",
+      })
+      .then((response) => {
+        setProperty(response.data);
+      });
+  }, [id]);
 
-  // console.log(property) 
+  // console.log(property)
   const newLocal = "bg-green-500";
 
   return (
-    <section>
+    <section className="bg-white">
+      <Header />
       <div className="container mx-auto min-h-[800px] mb-14">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
           <div className="mb-4 lg:mb-0 flex gap-x-1 ">
@@ -46,7 +50,11 @@ const PropertyDetails = () => {
         <div className="flex flex-col item-start gap-8 lg:flex-row">
           <div className="max-w-[768px]">
             <div className="mb-8">
-              <img src={property.image_url} alt="" className="rounded-tl-[90px] rounded-br-[90px] rounded-tr-[10px] rounded-bl-[10px] " />
+              <img
+                src={property.image_url}
+                alt=""
+                className="rounded-tl-[90px] rounded-br-[90px] rounded-tr-[10px] rounded-bl-[10px] "
+              />
             </div>
             <div className="flex gap-x-6 text-violet-700 mb-6">
               <div className="flex gap-x-2 items-center">
@@ -109,6 +117,7 @@ const PropertyDetails = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </section>
   );
 };

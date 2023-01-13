@@ -9,7 +9,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
 
-        <Link to="/">
+        <Link to="/home">
         <h1 className="text-4xl lg:text-[60px] font-semibold leading-none mb-2">Manyumba
             <span className="text-violet-700">.ke</span>
           </h1>
