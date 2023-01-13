@@ -13,7 +13,7 @@ const Banner = () => {
         flex-1 px-4 lg:px-0"
         >
           <h1 className="text-4xl lg:text-[58px] font-semibold leading-none mb-6">
-            <span className="text-violet-700">Rent / Buy </span>Your Dream House With
+            <span className="text-violet-800">Buy </span>Your Dream House With
             Us.
           </h1>
           <p className="max-w-[480px] mb-8">
