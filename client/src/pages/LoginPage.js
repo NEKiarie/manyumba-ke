@@ -51,7 +51,7 @@ const LoginPage = () => {
               </div>
               <a
                 href=""
-                className="border-2 border-violet text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
+                className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
                  hover:bg-violet-800 hover:text-white"
               >
                 Log In
