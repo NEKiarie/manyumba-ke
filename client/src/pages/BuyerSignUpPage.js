@@ -2,7 +2,7 @@ import React from "react";
 import { FaUserAlt, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline, MdOutlineRadioButtonChecked } from "react-icons/md";
 
-const SignUpPage = () => {
+const BuyerSignUpPage = () => {
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-39 text-center">
       <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
@@ -11,9 +11,9 @@ const SignUpPage = () => {
             Manyumba<span className="text-violet-700">.ke</span>
           </div>
           <div className="py-10">
-            <h2 className="text-3xl font-bold text-gray-700">Sign Up</h2>
+            <h2 className="text-3xl font-bold text-gray-700">Buyer Sign Up</h2>
             <h2 className="text-xl semi-bold text-gray-700">
-              Welcome to Manyumba.ke
+              Buy your desired property anywhere, anytime!
             </h2>
             <div className="border-2 w-10 bg-violet-800 border-violet-800 inline-block mb-2"></div>
             <div className=" flex justify-center my-2">
@@ -66,13 +66,13 @@ const SignUpPage = () => {
                   className="bg-white outline-none text-sm flex-1"
                 />
               </div>
-              <a
-                href=""
+              <button
+                
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
                  hover:bg-violet-800 hover:text-white mb-2"
               >
                 Create Your Account
-              </a>
+              </button>
               <label className="font-semibold text-gray-800">Existing User? <a href="/" className="border-2 rounded-full inline-block px-9 font-semibold border-violet-800
                text-violet-800  hover:bg-violet-800 hover:text-white mt-2">Login</a></label>
             </div>
@@ -86,7 +86,7 @@ const SignUpPage = () => {
             Do you have a property you want to sell? Let us help you out!.
           </p>
           <a
-            href="/signup"
+            href="/seller"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
             Get Started
@@ -98,4 +98,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default BuyerSignUpPage;

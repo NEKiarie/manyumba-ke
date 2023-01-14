@@ -2,31 +2,49 @@ import React from "react";
 import { FaUserAlt, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline, MdOutlineRadioButtonChecked } from "react-icons/md";
 
-const LoginPage = () => {
+const SellerSignUpPage = () => {
   return (
-    <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-40 text-center">
+    <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-39 text-center">
       <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
         <div className="w-3/5 p-5 items-center justify-center">
           <div className="text-left font-bold text-2xl">
             Manyumba<span className="text-violet-700">.ke</span>
           </div>
           <div className="py-10">
-            <h2 className="text-3xl font-bold text-gray-700">Login</h2>
+            <h2 className="text-3xl font-bold text-gray-700">Seller Sign Up</h2>
             <h2 className="text-xl semi-bold text-gray-700">
-              Welcome to Manyumba.ke
+              Reliable property sales, at your own convinence!
             </h2>
             <div className="border-2 w-10 bg-violet-800 border-violet-800 inline-block mb-2"></div>
             <div className=" flex justify-center my-2">
               <FaUserCircle className="text-4xl" />
             </div>
-            <p className="text-gray-400">Enter your details</p>
+            <p className="text-gray-400">Create an Account</p>
             <div className="flex flex-col items-center">
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaUserAlt className="text-gray-800 m-2" />
                 <input
                   type="text"
+                  name="firstName"
+                  placeholder="Enter your First name"
+                  className="bg-white outline-none text-sm flex-1"
+                />
+              </div>
+              <div className="bg-white w-64 p-2 flex items-center mb-4">
+                <FaUserAlt className="text-gray-800 m-2" />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Enter your Last name"
+                  className="bg-white outline-none text-sm flex-1"
+                />
+              </div>
+              <div className="bg-white w-64 p-2 flex items-center mb-4">
+                <FaUserAlt className="text-gray-800 m-2" />
+                <input
+                  type="text"
                   name="username"
-                  placeholder="Username"
+                  placeholder="Create your Username"
                   className="bg-white outline-none text-sm flex-1"
                 />
               </div>
@@ -35,43 +53,43 @@ const LoginPage = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Create your Password"
                   className="bg-white outline-none text-sm flex-1"
                 />
               </div>
-
-              <div className="flex justify-between w-64 mb-5 mt-5">
-                <label className="flex items-center text-xs">
-                  <input type="checkbox" name="remember" className="mr-1" />
-                  Remember me
-                </label>
-                <a href="#" className="text-xs">
-                  Forgot Password?
-                </a>
+              <div className="bg-white w-64 p-2 flex items-center mb-2">
+                <MdLockOutline className="text-gray-800 m-2" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Confirm your Password"
+                  className="bg-white outline-none text-sm flex-1"
+                />
               </div>
-              <a
-                href=""
+              <button
+                
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
-                 hover:bg-violet-800 hover:text-white"
+                 hover:bg-violet-800 hover:text-white mb-2"
               >
-                Log In
-              </a>
+                Create Your Account
+              </button>
+              <label className="font-semibold text-gray-800">Existing User? <a href="/seller" className="border-2 rounded-full inline-block px-9 font-semibold border-violet-800
+               text-violet-800  hover:bg-violet-800 hover:text-white mt-2">Login</a></label>
             </div>
           </div>
         </div>
         {/*SignIn Section */}
         <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] py-36 px-12">
-          <h2 className="text-3xl font-bold mb-2">Hello, Investor!</h2>
+          <h2 className="text-3xl font-bold mb-2">Frequently Asked Questions</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
           <p className="mb-10">
-            Do you have an Account? <br/>
-            Fill up personal information and get started with us.
+            Find out more about property.
           </p>
           <a
-            href="/signup"
+            href="/seller/signup"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
-            Sign Up
+            Get Started
           </a>
         </div>
         {/*SignUp Section */}
@@ -80,4 +98,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SellerSignUpPage;
