@@ -24,6 +24,9 @@ module.exports = {
       boxShadow: {
         1: '0px 4px 30px rgba(0, 0, 0, 0.08)',
       },
+      // backgroundImage: {
+      //    hero: 'url("/src/assets/img/Banner.png")',
+      // },
     },
   },
   plugins: [],

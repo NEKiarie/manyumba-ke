@@ -7,7 +7,7 @@ import HouseList from '../components/HouseList';
 
 
 const Home = () => {
-  return <div className='min-h-[1800px] bg-white'>
+  return <div className='min-h-[1900px] bg-white'>
     <Header />
     <Banner />
     <HouseList />
