@@ -40,14 +40,14 @@ const SellerLoginPage = () => {
                 />
               </div>
 
-              <div className="flex justify-between w-64 mb-5 mt-5">
-                <label className="flex items-center text-xs">
+              <div className="flex justify-between w-64 mb-4 mt-5">
+                {/* <label className="flex items-center text-xs">
                   <input type="checkbox" name="remember" className="mr-1" />
                   Remember me
                 </label>
                 <a href="#" className="text-xs">
                   Forgot Password?
-                </a>
+                </a> */}
               </div>
               <button
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
@@ -59,18 +59,24 @@ const SellerLoginPage = () => {
           </div>
         </div>
         {/*SignIn Section */}
-        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] py-36 px-12">
+        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
           <h2 className="text-3xl font-bold mb-2">Hello, Seller!</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
           <p className="mb-10">
-            Don't have an Account? <br/>
-            Fill up personal information to get started.
+            Don't have an Account? <br />
+            We got you covered! Fill up personal information to get started.
           </p>
           <a
             href="/seller/signup"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
-            Sign Up
+            Create An Account
+          </a>
+          <a
+            href="/buyer"
+            className="border-2 border-white mt-4 rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
+          >
+            Login as a Buyer
           </a>
         </div>
         {/*SignUp Section */}
