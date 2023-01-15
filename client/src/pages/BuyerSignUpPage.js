@@ -67,19 +67,26 @@ const BuyerSignUpPage = () => {
                 />
               </div>
               <button
-                
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
                  hover:bg-violet-800 hover:text-white mb-2"
               >
                 Create Your Account
               </button>
-              <label className="font-semibold text-gray-800">Existing User? <a href="/" className="border-2 rounded-full inline-block px-9 font-semibold border-violet-800
-               text-violet-800  hover:bg-violet-800 hover:text-white mt-2">Login</a></label>
+              <label className="font-semibold text-gray-800">
+                Existing User?{" "}
+                <a
+                  href="/"
+                  className="border-2 rounded-full inline-block px-9 font-semibold border-violet-800
+               text-violet-800  hover:bg-violet-800 hover:text-white mt-2"
+                >
+                  Login
+                </a>
+              </label>
             </div>
           </div>
         </div>
         {/*SignIn Section */}
-        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] py-36 px-12">
+        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
           <h2 className="text-3xl font-bold mb-2">Hello, Seller!</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
           <p className="mb-10">

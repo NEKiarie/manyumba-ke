@@ -40,14 +40,14 @@ const BuyerLoginPage = () => {
                 />
               </div>
 
-              <div className="flex justify-between w-64 mb-5 mt-5">
-                <label className="flex items-center text-xs">
+              <div className="flex justify-between w-64 mb-4 mt-5">
+                {/* <label className="flex items-center text-xs">
                   <input type="checkbox" name="remember" className="mr-1" />
                   Remember me
                 </label>
                 <a href="#" className="text-xs">
                   Forgot Password?
-                </a>
+                </a> */}
               </div>
               <button
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
@@ -59,7 +59,7 @@ const BuyerLoginPage = () => {
           </div>
         </div>
         {/*SignIn Section */}
-        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] py-36 px-12">
+        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
           <h2 className="text-3xl font-bold mb-2">Hello, Investor!</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
           <p className="mb-10">
@@ -68,9 +68,15 @@ const BuyerLoginPage = () => {
           </p>
           <a
             href="/buyer/signup"
+            className="border-2 mb-4 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
+          >
+            Create An Account
+          </a>
+          <a
+            href="/"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
-            Sign Up
+            Back
           </a>
         </div>
         {/*SignUp Section */}
