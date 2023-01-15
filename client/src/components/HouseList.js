@@ -3,6 +3,15 @@ import React, { useContext } from "react";
 //import motion for Animation
 import { motion } from "framer-motion";
 
+// core version + navigation, pagination modules:
+import { Autoplay, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+// import Swiper and modules styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "../slider.css";
+
 //import context
 import { HouseContext } from "./HouseContext";
 
@@ -16,8 +25,7 @@ import { Link } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
 
 const HouseList = () => {
-  const { loading, properties } = useContext(HouseContext); 
-  
+  const { loading, properties } = useContext(HouseContext);
 
   // //if loading true
   if (loading.properties && loading.types && loading.locations) {
@@ -34,25 +42,44 @@ const HouseList = () => {
     );
   }
 
-
   return (
     <section className="mb-20">
-      <div className="container mx-auto mt-20 ">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14">
-          {properties.slice(1).map((property, index) => (
-            <motion.div
-              whileInView={{ opacity: 1 }}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.5, type: "tween" }}
-              key={index}
-            >
-              <Link to={`/property/${property.id}`} key={property.id}>
-                <House property={property} />
-              </Link>
-            </motion.div>
-          ))}
+      <Swiper
+        slidesPerView={4}
+        spaceBetween={30}
+        slidesPerGroup={4}
+        loop={true}
+        loopFillGroupWithBlank={true}
+        pagination={{
+          clickable: true,
+        }}
+        autoplay={{
+          delay: 9500,
+          disableOnInteraction: false,
+        }}
+        navigation={false}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        <div className="container mx-auto mt-20 ">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14">
+            {properties.slice(1).map((property, index) => (
+              <SwiperSlide key={index}>
+                <motion.div
+                  whileInView={{ opacity: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.5, type: "tween" }}
+                  key={index}
+                >
+                  <Link to={`/property/${property.id}`} key={property.id}>
+                    <House property={property} />
+                  </Link>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </div>
         </div>
-      </div>
+      </Swiper>
     </section>
   );
 };
