@@ -3,10 +3,10 @@ import HouseList from "../components/HouseList";
 
 const FeaturedProperty = () => {
   return (
-    <section className="mb-20">
-      <div className="mx-auto items-center justify-center">
+    <section className="mb-2">
+      <div className="mx-auto">
         <div>
-          <h2 className=""></h2>
+          <h2></h2>
           <p></p>
         </div>
         <HouseList />

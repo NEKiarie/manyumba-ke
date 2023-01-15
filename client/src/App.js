@@ -11,7 +11,7 @@ import SellerSignUpPage from "./pages/SellerSignUpPage";
 
 const App = () => {
   return (
-    <div className="max-w-[1440px] w-full mx-auto">
+    <div className="max-w-[1440px] mx-auto">
       <Routes>
         <Route path="/" element={<BuyerLoginPage />} />
         <Route path="/buyer/signup" element={<BuyerSignUpPage />} />

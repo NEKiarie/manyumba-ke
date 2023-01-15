@@ -45,9 +45,9 @@ const House = ({ property }) => {
         alt=""
       />
       <div className="mb-4 flex gap-x-2 text-sm">
-        <div className="bg-green-500 rounded-full text-white px-3">{type.description}</div>
+        <div className="bg-green-500 rounded-full text-white px-3">{property.type.description}</div>
         <div className="bg-violet-500 rounded-full text-white px-3">
-          {location.county}
+          {property.location.county}
         </div>
       </div>
       <div className="text-lg font-semibold max-w-[260px] flex">
