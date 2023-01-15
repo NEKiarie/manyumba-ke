@@ -10,7 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "../slider.css";
+
 
 //import context
 import { HouseContext } from "./HouseContext";
@@ -45,9 +45,9 @@ const HouseList = () => {
   return (
     <section className="mb-20">
       <Swiper
-        slidesPerView={4}
-        spaceBetween={30}
-        slidesPerGroup={4}
+        slidesPerView={3}
+        spaceBetween={1}
+        slidesPerGroup={3}
         loop={true}
         loopFillGroupWithBlank={true}
         pagination={{

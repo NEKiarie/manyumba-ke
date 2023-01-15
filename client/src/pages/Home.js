@@ -6,8 +6,9 @@ import Header from '../components/Header';
 import FeaturedProperty from './FeaturedProperty';
 
 
+
 const Home = () => {
-  return <div className='min-h-[1900px] bg-white'>
+  return <div className='min-h-auto bg-white'>
     <Header />
     <Banner />
     <FeaturedProperty />
