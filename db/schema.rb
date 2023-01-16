@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_100758) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_15_145544) do
   create_table "buyers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -41,6 +41,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_100758) do
     t.date "sale_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -100,6 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_100758) do
     t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email_address"
+    t.string "phone_number"
   end
 
 end

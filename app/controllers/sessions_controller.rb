@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     private
 
     def find_user
-        User.find_by(username: params[:username])
+        User.find_by(user_name: params[:username])
     end
     
     def authorize
