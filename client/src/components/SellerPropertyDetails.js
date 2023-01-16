@@ -181,21 +181,21 @@ const BuyerLoginPage = () => {
         </div>
         {/*SignIn Section */}
         <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
-          <h2 className="text-3xl font-bold mb-2">Add Your Property Photo</h2>
+          {/* <h2 className="text-3xl font-bold mb-2">Add Your Property Photo</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
           <p className="mb-10">
             ###########
-          </p>
+          </p> */}
 
-          <input type="file" className="" />       
+          {/* <input type="file" className="" />        */}
           
 
-          <a
+          {/* <a
             href="/seller/page"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
             Back
-          </a>
+          </a> */}
         </div>
         {/*SignUp Section */}
       </div>
