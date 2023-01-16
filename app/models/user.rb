@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     validates :user_name, presence: true, uniqueness: true
-    validates :first_name, presence: true
+    validates :first_name, presence: true   
+    validates :last_name, presence: true
+    validates :email_address, presence: true, uniqueness: true
 
     # PASSWORD_REQUIREMENTS = /\A
     #     (?=.{6,})               # At least 6 character long
@@ -16,7 +18,9 @@ class User < ApplicationRecord
     #     if: :password_digest_changed?
     
     has_many :user_properties
-    has_many :properties, through: :user_properties
+    #has_many :properties, 
+    has_one :profile
+    has_many :properties, class_name: "Property", foreign_key: "seller_id"
 
     has_secure_password
 end

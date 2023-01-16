@@ -132,92 +132,113 @@ names = [
     {
         first_name: "Peter",
         last_name: "Kamau",
-        user_name: "peter_kamau"
+        user_name: "peter_kamau",
+        role: "Buyer"
     },
     {
         first_name: "George",
         last_name: "Muturi",
-        user_name: "george_muturi"
+        user_name: "george_muturi",
+        role: "Seller"
     },
     {
         first_name: "Elvis",
         last_name: "Kiarie",
-        user_name: "elvis_kiarie"
+        user_name: "elvis_kiarie",
+        role: "Buyer"
     },
     {
         first_name: "Tess",
         last_name: "Yieke",
-        user_name: "tess_yieke"
+        user_name: "tess_yieke",
+        role: "Seller"
+        
     },
     {
         first_name: "Jim",
         last_name: "Munene",
-        user_name: "jim_munene"
+        user_name: "jim_munene",
+        role: "Buyer"
     },
     {
         first_name: "Hafsna",
         last_name: "Nuh",
-        user_name: "hafsana_nuh"
+        user_name: "hafsana_nuh",
+        role: "Seller"
     },
     {
         first_name: "Steve",
         last_name: "Otieno",
-        user_name: "steve_otieno"
+        user_name: "steve_otieno",
+        role: "Buyer"
     },
     {
         first_name: "Solomon",
         last_name: "Kitonyi",
-        user_name: "solomon_kitonyi"
+        user_name: "solomon_kitonyi",
+        role: "Seller"
     },
     {
         first_name: "Anthony",
         last_name: "Mwaniki",
-        user_name: "anthony_mwaniki"
+        user_name: "anthony_mwaniki",
+        role: "Buyer"
     },
     {
         first_name: "Festus",
         last_name: "Mwaniki",
-        user_name: "festus_mwaniki"
+        user_name: "festus_mwaniki",
+        role: "Seller"
     }
 ]
 
 10.times do |i|     
     user = names[i] 
-    hash = BCrypt::Password.create("password")    
-    User.create!(
+    first_name = user[:first_name]
+    last_name = user[:last_name]
+    hash = BCrypt::Password.create("password")
+    email_address = "#{first_name}_#{last_name}@gmail.com"  
+      
+    user_created = User.create!(
         user_name: user[:user_name], 
         first_name: user[:first_name], 
-        last_name: user[:last_name],        
+        last_name: user[:last_name], 
+        email_address: email_address,      
         password_digest:hash,
         location_id:locations.sample.id,
-        admin: [true,false].sample        
-    )  
+        phone_number: "+254 717 #{i}23 45#{i}"         
+    )
+    Profile.create!(
+        role: user[:role],
+        user_id: user_created.id
+    )
 end
 puts "Done with users👨."
 
 
 users = User.all
+sellers = User.joins(:profile).where("profiles.role = ?", "Seller")
 
-#######################################
-# sellers
-#######################################
-puts "Creating Sellers..."
-Seller.destroy_all
-10.times do |i|
-    first_name = Faker::Name.first_name
-    last_name =  Faker::Name.last_name    
-    email_address = "#{first_name}_#{last_name}@gmail.com"     
-    Seller.create(       
-        first_name:first_name, 
-        last_name:last_name, 
-        email_address: email_address, 
-        location_id:locations.sample.id,
-        phone_number: "+254 717 123 456"        
-    )    
-end
-puts "Done with sellers"
+# #######################################
+# # sellers
+# #######################################
+# puts "Creating Sellers..."
+# Seller.destroy_all
+# 10.times do |i|
+#     first_name = Faker::Name.first_name
+#     last_name =  Faker::Name.last_name    
+#     email_address = "#{first_name}_#{last_name}@gmail.com"     
+#     Seller.create(       
+#         first_name:first_name, 
+#         last_name:last_name, 
+#         email_address: email_address, 
+#         location_id:locations.sample.id,
+#         phone_number: "+254 717 123 456"        
+#     )    
+# end
+# puts "Done with sellers"
 
-sellers = Seller.all
+# sellers = Seller.all
 #######################################
 # Properties
 #####################################
@@ -247,7 +268,7 @@ image_url = [
 
 
 ]
-30.times do |i|
+20.times do |i|
     location = locations.sample
     property = Property.create!(
         type_id: all_types.sample.id,
@@ -271,22 +292,22 @@ properties = Property.all
 
 
 
-#######################################
-# Buyers
-#####################################
-puts "Creating Buyers..."
-Buyer.destroy_all
-10.times do |i|
-    first_name = Faker::Name.first_name
-    last_name =  Faker::Name.last_name    
-    email_address = "#{first_name}_#{last_name}@gmail.com"     
-    Buyer.create(       
-        first_name:first_name, 
-        last_name:last_name, 
-        email_address: email_address    
-    )    
-end
-puts "Done with Buyers"
+# #######################################
+# # Buyers
+# #####################################
+# puts "Creating Buyers..."
+# Buyer.destroy_all
+# 10.times do |i|
+#     first_name = Faker::Name.first_name
+#     last_name =  Faker::Name.last_name    
+#     email_address = "#{first_name}_#{last_name}@gmail.com"     
+#     Buyer.create(       
+#         first_name:first_name, 
+#         last_name:last_name, 
+#         email_address: email_address    
+#     )    
+# end
+# puts "Done with Buyers"
 
 #######################################
 # UserProperties
