@@ -1,8 +1,99 @@
-import React from "react";
+import React, {useState, useContext} from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { FaUserAlt, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline, MdOutlineRadioButtonChecked } from "react-icons/md";
+import { HouseContext } from "../components/HouseContext";
 
 const BuyerLoginPage = () => {
+  const [formData, setFormData ] = useState({
+    username: "",
+    password: ""
+  })
+  const [errors, setErrors] = useState([])
+  const { setUser } = useContext(HouseContext)
+  const navigate = useNavigate()
+
+  //when a user types
+  const handleChange = (evnt) => {
+    const { target } = evnt
+    if(errors.length > 0){
+      setErrors("")
+    }    
+    setFormData(currentFormData => {
+      return {
+        ...currentFormData,
+        [target.name]: target.value
+      }
+    })
+  };
+
+  //send user data to the server
+
+  const sendLogins = (formData) =>{
+    axios.post("/auth/signin",formData)
+    .then(response => {
+      setUser(response.data)
+      setFormData({
+        username: "",
+        password: ""
+      })
+      //redirect to home
+      console.log("redirecting....")
+      navigate("/home")
+      
+    })
+    .catch(error => {
+      console.log("something went wrong")
+      console.log(error.message)
+    })
+
+  }
+
+  //when user clicks login btn
+ const handleClick = (event) => {
+    //Check if values are empty
+    if(!formData.username || !formData.password){
+      setErrors(currentErrors => {
+        return [
+          ...currentErrors,
+          "Please fill the username and Password"
+        ]
+      })
+      
+    }
+    // if(!/A-Za-z+/.test(formData.username)){
+    //   setErrors([...errors,"Username should have atleast one lowercase and uppercase letter"])      
+    // }
+    // if(!/0-9+/.test(formData.username)){
+    //   setErrors([...errors,"Username should have atleast one number"])      
+    // }
+    // if(!/0-9+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one number"])      
+    // }
+    // if(!/a-z+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one lowercase letter"])      
+    // }
+    // if(!/A-Z+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one uppercase letter"])      
+    // }
+    // if(!/0-9+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one number"])      
+    // }
+    // if(!/[!@#$%^&*]/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one symbol"])      
+    // }
+    // if(!/[a-z]{8,}/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast 8 characters"])      
+    // }
+    
+    //check if password is more than
+    if(!errors.length){
+      sendLogins(formData)
+    } 
+    
+ }
+ 
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-40 text-center">
       <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
@@ -27,6 +118,8 @@ const BuyerLoginPage = () => {
                   type="text"
                   name="username"
                   placeholder="Username"
+                  value={formData.username}
+                  onChange = {handleChange}
                   className="bg-white outline-none text-sm flex-1"
                 />
               </div>
@@ -36,6 +129,8 @@ const BuyerLoginPage = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  value={formData.password}
+                  onChange = {handleChange}
                   className="bg-white outline-none text-sm flex-1"
                 />
               </div>
@@ -52,6 +147,7 @@ const BuyerLoginPage = () => {
               <button
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
                  hover:bg-violet-800 hover:text-white"
+                 onClick = {handleClick}
               >
                 Log In
               </button>

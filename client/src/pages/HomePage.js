@@ -20,15 +20,7 @@ const BuyerLoginPage = () => {
               <FaUserCircle className="text-4xl" />
             </div>
             <p className="text-gray-400">Continue As:</p>
-            <div className="flex flex-col items-center justify-center">
-              <div className="bg-white w-64 p-2 items-center mb-4">
-                <a href="#"
-                  className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
-                 hover:bg-violet-800 hover:text-white"
-                >
-                  Admin
-                </a>
-              </div>
+            <div className="flex flex-col items-center justify-center">              
               <div className="bg-white w-64 p-2 items-center">
                 <a href="/buyer"
                   className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
