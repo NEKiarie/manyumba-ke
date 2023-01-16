@@ -29,8 +29,18 @@ const LoginPage = () => {
   //send user data to the server
 
   const sendLogins = (formData) =>{
-    axios.post("/auth/signin",JSON.stringify(formData))
-    .then(response => setUser(response.data))
+    axios.post("/auth/signin",formData)
+    .then(response => {
+      setUser(response.data)
+      setFormData({
+        username: "",
+        password: ""
+      })
+    })
+    .catch(error => {
+      console.log("something went wrong")
+      console.log(error)
+    })
 
   }
 
@@ -46,32 +56,36 @@ const LoginPage = () => {
       })
       
     }
-    if(!/A-Za-z+/.test(formData.username)){
-      setErrors([...errors,"Username should have atleast one lowercase and uppercase letter"])      
-    }
-    if(!/0-9+/.test(formData.username)){
-      setErrors([...errors,"Username should have atleast one number"])      
-    }
-    if(!/0-9+/.test(formData.password)){
-      setErrors([...errors,"Password should have atleast one number"])      
-    }
-    if(!/a-z+/.test(formData.password)){
-      setErrors([...errors,"Password should have atleast one lowercase letter"])      
-    }
-    if(!/A-Z+/.test(formData.password)){
-      setErrors([...errors,"Password should have atleast one uppercase letter"])      
-    }
-    if(!/0-9+/.test(formData.password)){
-      setErrors([...errors,"Password should have atleast one number"])      
-    }
-    if(!/[!@#$%^&*]/.test(formData.password)){
-      setErrors([...errors,"Password should have atleast one symbol"])      
-    }
-    if(!/[a-z]{8,}/.test(formData.password)){
-      setErrors([...errors,"Password should have atleast 8 characters"])      
-    }
+    // if(!/A-Za-z+/.test(formData.username)){
+    //   setErrors([...errors,"Username should have atleast one lowercase and uppercase letter"])      
+    // }
+    // if(!/0-9+/.test(formData.username)){
+    //   setErrors([...errors,"Username should have atleast one number"])      
+    // }
+    // if(!/0-9+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one number"])      
+    // }
+    // if(!/a-z+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one lowercase letter"])      
+    // }
+    // if(!/A-Z+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one uppercase letter"])      
+    // }
+    // if(!/0-9+/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one number"])      
+    // }
+    // if(!/[!@#$%^&*]/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast one symbol"])      
+    // }
+    // if(!/[a-z]{8,}/.test(formData.password)){
+    //   setErrors([...errors,"Password should have atleast 8 characters"])      
+    // }
     
-    //check if password is more than 
+    //check if password is more than
+    if(!errors.length){
+      sendLogins(formData)
+    } 
+    
  }
  
  
@@ -128,8 +142,8 @@ const LoginPage = () => {
               {
                 !!errors.length 
                 && 
-                <ul class="flex flex-col text-red-500 text-base font-semibold italic mb-5 mt-5">
-                  {errors.map(error => <li>{error}</li>)}                  
+                <ul className="flex flex-col text-red-500 text-base font-semibold italic mb-5 mt-5">
+                  {errors.map((error,index) => <li key={index}>{error}</li>)}                  
                 </ul>
                 
               }               
