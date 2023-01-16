@@ -91,12 +91,6 @@ const SellerSignUpPage = () => {
           >
             Get Started
           </a>
-          <a
-            href="/"
-            className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
-          >
-          Home
-          </a>
         </div>
         {/*SignUp Section */}
       </div>
