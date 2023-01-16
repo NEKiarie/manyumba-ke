@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaUserAlt, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
@@ -11,6 +12,7 @@ const LoginPage = () => {
   })
   const [errors, setErrors] = useState([])
   const { setUser } = useContext(HouseContext)
+  const navigate = useNavigate()
 
   //when a user types
   const handleChange = (evnt) => {
@@ -36,6 +38,10 @@ const LoginPage = () => {
         username: "",
         password: ""
       })
+      //redirect to home
+      console.log("redirecting....")
+      navigate("/home")
+      
     })
     .catch(error => {
       console.log("something went wrong")
