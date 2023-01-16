@@ -10,7 +10,7 @@ const ProtectedRoute  = () => {
     console.log(authToken ? authToken : "no token")
     console.log(user)
     return (
-        authToken ? <Outlet /> : <Navigate to="/" /> 
+        user ? <Outlet /> : <Navigate to="/" /> 
     )    
 
 }

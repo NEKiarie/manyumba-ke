@@ -5,8 +5,19 @@ import { FaUserAlt, FaHome, FaEnvelope } from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
 
 const BuyerLoginPage = () => {
-  const { types, locations, loading } = useContext(HouseContext)
-  console.log(types, locations)
+  const [formData, setFormData ] = useState({
+    type: "",
+    county: "",
+    location: "",
+    baths: "",
+    beds: "",
+    size: "",
+    price: "",
+    imageUrl: ""
+
+  })
+  const [errors, setErrors] = useState([])
+  const { types, locations, loading } = useContext(HouseContext) 
   const uniqueCounties = [...new Set(locations.slice(1).map(({county}) => county))]
   
   
@@ -15,6 +26,36 @@ const BuyerLoginPage = () => {
       <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
     );
   }
+
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    })
+  };
+
+  const handleClick = () => {
+    const new_property = {
+      type_id: formData.type,
+      address: " ",
+      location_id: formData.location,
+      price: formData.price,
+      beds: formData.beds,
+      baths: formData.baths,
+      size: formData.size,
+      image_url: formData.imageUrl,
+      notes: "Very good properties with ample size",
+      fore_closure: false
+    };
+    
+    axios.post("/properties", new_property)
+    .then(response => response.data)
+    .catch(error => {
+      console.log("something went wrong")
+      console.log(error.message)
+      setErrors()
+    })
+  };
 
   
   return (
@@ -34,55 +75,64 @@ const BuyerLoginPage = () => {
               <FaHome className="text-4xl" />
             </div>
             <p className="text-gray-400">Enter Your Property Details!</p>
+
+
             <div className="flex flex-col items-center">
               <span>Select Property type </span>
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaHome className="text-gray-800 m-2" />
                 {/* <label>Select Your Property type</label> */}
-                <select name="type" id="type" className="bg-white outline-none text-sm flex-1">                    
+                <select name="type" id="type" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
                     {types.slice(1).map(({id, description}) => {
                       return <option key ={id}value={id}>{description}</option>
                     })}
                 </select>               
               </div>
+
               <span>Select County property is located </span>
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaUserAlt className="text-gray-800 m-2" />
-                <select name="type" id="type" className="bg-white outline-none text-sm flex-1">                    
+                <select name="county" id="county" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
                     {uniqueCounties.map((county,index) => {
                       return <option key ={index}value={county}>{county}</option>
                     })}
                 </select>
               </div>
+
               <span>Select Location of the property </span>
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaUserAlt className="text-gray-800 m-2" />
-                <select name="type" id="type" className="bg-white outline-none text-sm flex-1">                    
+                <select name="location" id="location" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
                     {locations.slice(1).map(({name, id},index) => {
                       return <option key ={id}value={id}>{name}</option>
                     })}
                 </select>
               </div>
+
               <span>Number of baths</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
+              <div className="bg-white w-64 p-2 flex items-center mb-4" >
                 <FaUserAlt className="text-gray-800 m-2" />
                 <input
                   type="number"
                   name="baths"
                   placeholder="Enter the Number of Bathrooms"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange={handleChange}
                 />
               </div>
+
               <span>Number of beds</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
+              <div className="bg-white w-64 p-2 flex items-center mb-4" >
                 <FaUserAlt className="text-gray-800 m-2" />
                 <input
                   type="number"
                   name="beds"
                   placeholder="Enter the Number of Bedrooms"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange={handleChange}
                 />
               </div>
+
               <span>Size of the property</span>
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaUserAlt className="text-gray-800 m-2" />
@@ -91,8 +141,10 @@ const BuyerLoginPage = () => {
                   name="size"
                   placeholder="Enter the size of Property"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange={handleChange}
                 />
               </div>
+
               <span>Price of the property</span>
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaUserAlt className="text-gray-800 m-2" />
@@ -101,12 +153,26 @@ const BuyerLoginPage = () => {
                   name="price"
                   placeholder="Enter the Price"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <span>Image Url of the property</span>
+              <div className="bg-white w-64 p-2 flex items-center mb-4">
+                <FaUserAlt className="text-gray-800 m-2" />
+                <input
+                  type="text"
+                  name="imageUrl"
+                  placeholder="Enter the Price"
+                  className="bg-white outline-none text-sm flex-1"
+                  onChange={handleChange}
                 />
               </div>
 
               <button
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
                  hover:bg-violet-800 hover:text-white"
+                 onClick={handleClick}
               >
                 Save Your Details
               </button>
@@ -115,22 +181,21 @@ const BuyerLoginPage = () => {
         </div>
         {/*SignIn Section */}
         <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
-          <h2 className="text-3xl font-bold mb-2">Add Your Property Photo</h2>
+          {/* <h2 className="text-3xl font-bold mb-2">Add Your Property Photo</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
           <p className="mb-10">
             ###########
-          </p>
+          </p> */}
 
-          <button className="border-2 mb-4 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800">
-            Upload Your Photo
-          </button>
+          {/* <input type="file" className="" />        */}
+          
 
-          <a
+          {/* <a
             href="/seller/page"
             className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
             Back
-          </a>
+          </a> */}
         </div>
         {/*SignUp Section */}
       </div>
