@@ -4,12 +4,12 @@ import React, { useContext } from "react";
 import { motion } from "framer-motion";
 
 // core version + navigation, pagination modules:
-import { Autoplay, Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-// import Swiper and modules styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+// import { Autoplay, Navigation, Pagination } from "swiper";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// // import Swiper and modules styles
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
 
 
 //import context
@@ -44,7 +44,7 @@ const HouseList = () => {
 
   return (
     <section className="mb-20">
-      <Swiper
+      {/* <Swiper
         slidesPerView={3}
         spaceBetween={1}
         slidesPerGroup={3}
@@ -60,11 +60,11 @@ const HouseList = () => {
         navigation={false}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
-      >
+      > */}
         <div className="container mx-auto mt-20 ">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14">
             {properties.slice(1).map((property, index) => (
-              <SwiperSlide key={index}>
+              // <SwiperSlide key={index}>
                 <motion.div
                   whileInView={{ opacity: 1 }}
                   whileHover={{ scale: 1.1 }}
@@ -75,11 +75,11 @@ const HouseList = () => {
                     <House property={property} />
                   </Link>
                 </motion.div>
-              </SwiperSlide>
+              // </SwiperSlide>
             ))}
           </div>
         </div>
-      </Swiper>
+      {/* </Swiper> */}
     </section>
   );
 };

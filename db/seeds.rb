@@ -247,7 +247,7 @@ image_url = [
 
 
 ]
-30.times do |i|
+10.times do |i|
     location = locations.sample
     property = Property.create!(
         type_id: all_types.sample.id,

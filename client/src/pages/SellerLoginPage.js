@@ -73,10 +73,10 @@ const SellerLoginPage = () => {
             Create An Account
           </a>
           <a
-            href="/buyer"
+            href="/"
             className="border-2 border-white mt-4 rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
           >
-            Login as a Buyer
+            Back
           </a>
         </div>
         {/*SignUp Section */}
