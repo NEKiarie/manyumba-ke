@@ -8,8 +8,9 @@ import axios from "axios";
 export const HouseContext = createContext();
 
 const HouseContextProvider = ({ children }) => {
-  const [locations, setLocations] = useState([])
+  const [locations, setLocations] = useState([]);
   const [selectedCounty, setSelectedCounty] = useState(null);
+  const [user, setUser] = useState();
   const [selectedType, setSelectedType] = useState({
     id: 0,
     description: ""
@@ -110,6 +111,8 @@ const HouseContextProvider = ({ children }) => {
         properties,       
         loading,
         setLoading,
+        setUser,
+        user,
         // handleClick,
         
         locations

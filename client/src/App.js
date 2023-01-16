@@ -8,6 +8,7 @@ import SellerLoginPage from "./pages/SellerLoginPage";
 import SellerSignUpPage from "./pages/SellerSignUpPage";
 import HomePage from "./pages/HomePage";
 import BuyerLoginPage from "./pages/BuyerLoginPage";
+import LoginPage from "./pages/LoginPage";
 import SellerPage from "./pages/SellerPage";
 import SellerPropertyDetails from "./components/SellerPropertyDetails";
 
@@ -17,6 +18,7 @@ const App = () => {
     <div className="max-w-[1440px] mx-auto">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/seller/page" element={<SellerPage />} />
         <Route path="/seller/page/2" element={<SellerPropertyDetails/>} />
         <Route path="/buyer" element={<BuyerLoginPage/>} />
