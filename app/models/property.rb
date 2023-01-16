@@ -6,7 +6,7 @@ class Property < ApplicationRecord
     belongs_to :type
     belongs_to :location
 
-    belongs_to :seller
+    belongs_to :seller, class_name: "User"
 
     has_many :payment
     has_many :property_images
