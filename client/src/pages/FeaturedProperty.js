@@ -5,8 +5,8 @@ const FeaturedProperty = () => {
   return (
     <section className="mb-2">
       <div className="mx-auto">
-        <div>
-          <h2></h2>
+      <div className="container mx-auto mt-20 ">
+          <h2>something</h2>
           <p></p>
         </div>
         <HouseList />
