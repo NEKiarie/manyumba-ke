@@ -10,7 +10,7 @@ export const HouseContext = createContext();
 const HouseContextProvider = ({ children }) => {
   const [locations, setLocations] = useState([]);
   const [selectedCounty, setSelectedCounty] = useState(null);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [selectedType, setSelectedType] = useState({
     id: 0,
     description: ""
