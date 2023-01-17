@@ -1,14 +1,24 @@
 import React, {useState, useContext} from "react";
 import axios from "axios";
 import { HouseContext } from "../components/HouseContext";
-import { FaUserAlt, FaHome, FaEnvelope } from "react-icons/fa";
+import {
+  FaUserAlt,
+  FaBath,
+  FaHome,
+  FaBed,
+  FaMapMarkedAlt,
+  FaRssSquare,
+  FaDollarSign,
+  FaImage,
+} from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
+import Alert from "../utils/Alert";
 
 const BuyerLoginPage = () => {
   const [formData, setFormData ] = useState({
-    type: "",
-    county: "",
-    location: "",
+    type: 1,
+    county: 1,
+    location: 1,
     baths: "",
     beds: "",
     size: "",
@@ -17,7 +27,13 @@ const BuyerLoginPage = () => {
 
   })
   const [errors, setErrors] = useState([])
-  const { types, locations, loading } = useContext(HouseContext) 
+  const [alertMessagge, setAlertMessagge] = useState({
+    type: "",
+    show: false,
+    title: "",
+    body: ""
+  })
+  const { types, locations, loading, user, setProperties } = useContext(HouseContext) 
   const uniqueCounties = [...new Set(locations.slice(1).map(({county}) => county))]
   
   
@@ -35,9 +51,10 @@ const BuyerLoginPage = () => {
   };
 
   const handleClick = () => {
+    const newPropertyLocation = locations[Number(formData.location)] 
     const new_property = {
       type_id: formData.type,
-      address: " ",
+      address: `${newPropertyLocation.county}, ${newPropertyLocation.name}`,
       location_id: formData.location,
       price: formData.price,
       beds: formData.beds,
@@ -45,161 +62,287 @@ const BuyerLoginPage = () => {
       size: formData.size,
       image_url: formData.imageUrl,
       notes: "Very good properties with ample size",
-      fore_closure: false
+      fore_closure: false,
+      seller_id: user.id,
+      description: "Some text here or something describing the property"
     };
     
     axios.post("/properties", new_property)
-    .then(response => response.data)
+    .then(response =>{ 
+      setProperties(currentProperties => {
+        return [
+          ...currentProperties,
+          response.data
+        ]
+      })
+      setAlertMessagge({
+        type: "success",
+        show: true,
+        title: "Property Creation",
+        body: "The property was added successfully in the database"
+      })
+
+    })
     .catch(error => {
       console.log("something went wrong")
       console.log(error.message)
-      setErrors()
+      setAlertMessagge({
+        type: "failed",
+        show: true,
+        title: "Property Creation",
+        body: "The property was NOT added successfully in the database"
+      })
     })
+    
   };
+  const toggleAlert = (show) => {
+    setAlertMessagge({
+      ...alertMessagge,
+      show: show
+    })
+  }
 
   
   return (
-    <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-3 mb-6 text-center">
-      <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
-        <div className="w-3/5 p-5 items-center justify-center">
-          <div className="text-left font-bold text-2xl">
-            Manyumba<span className="text-violet-700">.ke</span>
-          </div>
-          <div className="py-10">
-            <h2 className="text-3xl font-bold text-gray-700">Hello</h2>
-            <h2 className="text-xl semi-bold text-gray-700">
-              Welcome to Manyumba.ke
-            </h2>
-            <div className="border-2 w-10 bg-violet-800 border-violet-800 inline-block mb-2"></div>
-            <div className=" flex justify-center my-2">
-              <FaHome className="text-4xl" />
-            </div>
-            <p className="text-gray-400">Enter Your Property Details!</p>
-
-
-            <div className="flex flex-col items-center">
-              <span>Select Property type </span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaHome className="text-gray-800 m-2" />
-                {/* <label>Select Your Property type</label> */}
-                <select name="type" id="type" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
-                    {types.slice(1).map(({id, description}) => {
-                      return <option key ={id}value={id}>{description}</option>
-                    })}
-                </select>               
-              </div>
-
-              <span>Select County property is located </span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <select name="county" id="county" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
-                    {uniqueCounties.map((county,index) => {
-                      return <option key ={index}value={county}>{county}</option>
-                    })}
-                </select>
-              </div>
-
-              <span>Select Location of the property </span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <select name="location" id="location" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
-                    {locations.slice(1).map(({name, id},index) => {
-                      return <option key ={id}value={id}>{name}</option>
-                    })}
-                </select>
-              </div>
-
-              <span>Number of baths</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4" >
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="number"
-                  name="baths"
-                  placeholder="Enter the Number of Bathrooms"
-                  className="bg-white outline-none text-sm flex-1"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <span>Number of beds</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4" >
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="number"
-                  name="beds"
-                  placeholder="Enter the Number of Bedrooms"
-                  className="bg-white outline-none text-sm flex-1"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <span>Size of the property</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="text"
-                  name="size"
-                  placeholder="Enter the size of Property"
-                  className="bg-white outline-none text-sm flex-1"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <span>Price of the property</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="number"
-                  name="price"
-                  placeholder="Enter the Price"
-                  className="bg-white outline-none text-sm flex-1"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <span>Image Url of the property</span>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="text"
-                  name="imageUrl"
-                  placeholder="Enter the Price"
-                  className="bg-white outline-none text-sm flex-1"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <button
-                className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
-                 hover:bg-violet-800 hover:text-white"
-                 onClick={handleClick}
+   
+    <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-1 mb-6 text-center">
+    <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
+      <div className="w-1/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12"></div>
+      <div className="w-3/5 p-5 items-center justify-center">
+        <div className="text-left font-bold text-2xl mb-8">
+          Manyumba<span className="text-violet-700">.ke</span>
+        </div>
+        {alertMessagge.show && <Alert type={alertMessagge.type} toggleAlert={toggleAlert} title={alertMessagge.title} body={alertMessagge.body} />}
+        <form class="w-full max-w-lg">
+          <div class="flex flex-wrap mx-3 mb-6">
+            {/* Property Type select */}
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <FaHome className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-first-name"
               >
-                Save Your Details
-              </button>
+                Property Type
+              </label>
+              <div class="relative">
+                <select
+                  class="block appearance-none w-full
+                   bg-gray-200 border border-gray-200 text-gray-700 
+                   py-3 px-4 pr-8 rounded leading-tight focus:outline-none
+                    focus:bg-white focus:border-gray-500"
+                  id="type"
+                  name="type"
+                  onChange={handleChange}
+                >
+                  {types.slice(1).map(({ id, description }) => {
+                    return (
+                      <option key={id} value={id}>
+                        {description}
+                      </option>
+                    );
+                  })}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    class="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* County select */}
+
+            <div class="w-full md:w-1/2 px-3">
+              <FaMapMarkedAlt className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-last-name"
+              >
+                County
+              </label>
+              <div class="relative">
+                <select
+                  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  id="county"
+                  name="county"
+                  onChange={handleChange}
+                >
+                  {uniqueCounties.map((county, index) => {
+                    return (
+                      <option key={index} value={county}>
+                        {county}
+                      </option>
+                    );
+                  })}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg
+                    class="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        {/*SignIn Section */}
-        <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
-          {/* <h2 className="text-3xl font-bold mb-2">Add Your Property Photo</h2>
-          <div className="border-2 w-10 bg-white inline-block mb-2"></div>
-          <p className="mb-10">
-            ###########
-          </p> */}
 
-          {/* <input type="file" className="" />        */}
-          
+          {/* Location Select */}
 
-          {/* <a
-            href="/seller/page"
-            className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
-          >
-            Back
-          </a> */}
-        </div>
-        {/*SignUp Section */}
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-4">
+            <FaMapMarkedAlt className="text-xl" />
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-first-name"
+            >
+              Location
+            </label>
+            <div class="relative">
+              <select
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="location"
+                name="location"
+                onChange={handleChange}
+              >
+                {locations.slice(1).map(({ name, id }, index) => {
+                  return (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
+                  );
+                })}
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  class="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Number of Bathrooms */}
+
+          <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <FaBath className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Bathrooms
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200
+              text-gray-700 border border-gray-200 rounded py-3 px-4 
+                leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="baths"
+                type="number"
+                onChange={handleChange}
+                placeholder="Bathrooms"
+              />
+            </div>
+
+            {/* Number of Bedrooms */}
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <FaBed className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Bedrooms
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
+               py-3 px-4 leading-tight focus:outline-none focus:bg-white
+               focus:border-gray-500"
+                id="beds"
+                type="number"
+                onChange={handleChange}
+                placeholder="Bedrooms"
+              />
+            </div>
+
+            {/* Size of Property */}
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-4">
+              <FaRssSquare className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Size
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
+               py-3 px-4 leading-tight focus:outline-none focus:bg-white
+               focus:border-gray-500"
+                id="size"
+                type="text"
+                onChange={handleChange}
+                placeholder="Size"
+              />
+            </div>
+
+            {/* Property Price */}
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <FaDollarSign className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Price
+              </label>
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
+               py-3 px-4 leading-tight focus:outline-none focus:bg-white
+               focus:border-gray-500"
+                id="price"
+                type="number"
+                onChange={handleChange}
+                placeholder="Price"
+              />
+            </div>
+
+            {/* imageUrl */}
+            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+              <FaImage className="text-xl" />
+              <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="grid-city"
+              >
+                Property Image
+              </label>
+
+              <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded 
+               py-3 px-4 leading-tight focus:outline-none focus:bg-white
+               focus:border-gray-500"
+                id="imageUrl"
+                type="text"
+                onChange={handleChange}
+                placeholder="Image"
+              />
+            </div>
+          </div>
+        </form>
+        <button
+          className="border-2 mt-8 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
+               hover:bg-violet-800 hover:text-white"
+          onClick={handleClick}
+        >
+          Save Your Details
+        </button>
       </div>
-    </main>
+    </div>
+  </main>
   );
 };
 

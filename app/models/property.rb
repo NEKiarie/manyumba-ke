@@ -1,7 +1,9 @@
 class Property < ApplicationRecord
-    validates :type, presence: true
+    validates :type_id, presence: true
     validates :address, presence: true
-    validates :location, presence: true
+    validates :location_id, presence: true
+    validates :seller_id, presence: true
+    validates :price, presence: true
     
     belongs_to :type
     belongs_to :location
