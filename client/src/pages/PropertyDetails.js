@@ -85,7 +85,7 @@ const PropertyDetails = () => {
                 </Link>
               </div>
             </div>
-            <form className="flex flex-col gap-y-4">
+            <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
               <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
@@ -110,9 +110,10 @@ const PropertyDetails = () => {
                 <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition">
                   Send Message
                 </button>
-                <button className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition">
+                
+                <a href="https://www.w3schools.com/" target="_blank" className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition">
                   Make your Payment
-                </button>
+                </a>
               </div>
             </form>
           </div>

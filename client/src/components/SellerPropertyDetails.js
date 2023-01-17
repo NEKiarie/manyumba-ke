@@ -3,12 +3,13 @@ import axios from "axios";
 import { HouseContext } from "../components/HouseContext";
 import { FaUserAlt, FaHome, FaEnvelope } from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
+import Alert from "../utils/Alert";
 
 const BuyerLoginPage = () => {
   const [formData, setFormData ] = useState({
-    type: "",
-    county: "",
-    location: "",
+    type: 1,
+    county: 1,
+    location: 1,
     baths: "",
     beds: "",
     size: "",
@@ -17,7 +18,13 @@ const BuyerLoginPage = () => {
 
   })
   const [errors, setErrors] = useState([])
-  const { types, locations, loading } = useContext(HouseContext) 
+  const [alertMessagge, setAlertMessagge] = useState({
+    type: "",
+    show: false,
+    title: "",
+    body: ""
+  })
+  const { types, locations, loading, user, setProperties } = useContext(HouseContext) 
   const uniqueCounties = [...new Set(locations.slice(1).map(({county}) => county))]
   
   
@@ -35,9 +42,10 @@ const BuyerLoginPage = () => {
   };
 
   const handleClick = () => {
+    const newPropertyLocation = locations[Number(formData.location)] 
     const new_property = {
       type_id: formData.type,
-      address: " ",
+      address: `${newPropertyLocation.county}, ${newPropertyLocation.name}`,
       location_id: formData.location,
       price: formData.price,
       beds: formData.beds,
@@ -45,17 +53,45 @@ const BuyerLoginPage = () => {
       size: formData.size,
       image_url: formData.imageUrl,
       notes: "Very good properties with ample size",
-      fore_closure: false
+      fore_closure: false,
+      seller_id: user.id,
+      description: "Some text here or something describing the property"
     };
     
     axios.post("/properties", new_property)
-    .then(response => response.data)
+    .then(response =>{ 
+      setProperties(currentProperties => {
+        return [
+          ...currentProperties,
+          response.data
+        ]
+      })
+      setAlertMessagge({
+        type: "success",
+        show: true,
+        title: "Property Creation",
+        body: "The property was added successfully in the database"
+      })
+
+    })
     .catch(error => {
       console.log("something went wrong")
       console.log(error.message)
-      setErrors()
+      setAlertMessagge({
+        type: "failed",
+        show: true,
+        title: "Property Creation",
+        body: "The property was NOT added successfully in the database"
+      })
     })
+    
   };
+  const toggleAlert = (show) => {
+    setAlertMessagge({
+      ...alertMessagge,
+      show: show
+    })
+  }
 
   
   return (
@@ -65,6 +101,7 @@ const BuyerLoginPage = () => {
           <div className="text-left font-bold text-2xl">
             Manyumba<span className="text-violet-700">.ke</span>
           </div>
+          {alertMessagge.show && <Alert type={alertMessagge.type} toggleAlert={toggleAlert} title={alertMessagge.title} body={alertMessagge.body} />}
           <div className="py-10">
             <h2 className="text-3xl font-bold text-gray-700">Hello</h2>
             <h2 className="text-xl semi-bold text-gray-700">
@@ -82,7 +119,12 @@ const BuyerLoginPage = () => {
               <div className="bg-white w-64 p-2 flex items-center mb-4">
                 <FaHome className="text-gray-800 m-2" />
                 {/* <label>Select Your Property type</label> */}
-                <select name="type" id="type" className="bg-white outline-none text-sm flex-1" onChange={handleChange}>                    
+                <select 
+                    name="type" 
+                    id="type" 
+                    className="bg-white outline-none text-sm flex-1" 
+                    onChange={handleChange}
+                    >                    
                     {types.slice(1).map(({id, description}) => {
                       return <option key ={id}value={id}>{description}</option>
                     })}

@@ -108,11 +108,13 @@ const HouseContextProvider = ({ children }) => {
         selectedType,
         setSelectedType,
         types,
-        properties,       
+        properties,
+        setProperties,       
         loading,
         setLoading,
         setUser,
         user,
+        
         // handleClick,
         
         locations
