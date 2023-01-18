@@ -16,6 +16,7 @@ const HouseContextProvider = ({ children }) => {
     description: ""
   });
   const [types, setTypes] = useState([]);
+ 
   const [properties, setProperties] = useState([]); 
   const [loading, setLoading] = useState({
     locations: true,

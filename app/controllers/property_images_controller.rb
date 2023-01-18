@@ -4,6 +4,8 @@ class PropertyImagesController < ApplicationController
   # GET /property_images
   def index
     @property_images = PropertyImage.all
+    
+    
 
     render json: @property_images
   end

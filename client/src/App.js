@@ -12,11 +12,22 @@ import LoginPage from "./pages/LoginPage";
 import SellerPage from "./pages/SellerPage";
 import SellerPropertyDetails from "./components/SellerPropertyDetails";
 import ProtectedRoute from "./utils/ProtectedRoute";
+// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+// const initialOptions = {
+//   "client-id": "test",
+//   currency: "USD",
+//   intent: "capture",
+//   "data-client-token": "abc123xyz==",
+// };
 
 
 const App = () => {
   return (
     <div className="max-w-[1440px] mx-auto">
+       {/* <PayPalScriptProvider deferloading={true}options={{ "client-id": "test" }}>
+            <PayPalButtons style={{ layout: "horizontal" }} />
+        </PayPalScriptProvider> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -31,6 +42,7 @@ const App = () => {
           <Route path="/property/:id" element={<PropertyDetails />} />
         </Route>
       </Routes>
+    
     </div>
   );
 };

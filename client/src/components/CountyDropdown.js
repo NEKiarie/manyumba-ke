@@ -9,6 +9,9 @@ import { Menu } from "@headlessui/react";
 //import house context
 import { HouseContext } from "./HouseContext";
 
+
+const counties = ["Nairobi", "Kiambu"]
+
 const CountyDropdown = () => {
 const { selectedCounty,
   setSelectedCounty, 
@@ -36,16 +39,16 @@ const { selectedCounty,
       </Menu.Button>
 
       <Menu.Items className="dropdown-menu">
-        {locations.map((property, index) => {  
-              
+        {counties.map((county, index) => {  
+              // console.log(property, index)
           return (
             <Menu.Item
-              onClick={() => {                
-                setSelectedCounty(county)
-              }}
+              onClick={() => setSelectedCounty(county)
+              }
               className="cursor-pointer hover: text-violet-700 transition"
               as="li"
-              key={property.id ? property.id : Math.random() + 1}
+              // key={property.id ? property.id : Math.random() + 1}
+              key ={index}
             >
               {county}
             </Menu.Item>
