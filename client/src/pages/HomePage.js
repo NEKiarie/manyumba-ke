@@ -12,7 +12,7 @@ const BuyerLoginPage = () => {
           </div>
           <div className="py-10">
             <h2 className="text-3xl font-bold text-gray-700">
-              {" "}
+              
               Welcome to Manyumba.ke
             </h2>
             <div className="border-2 w-10 bg-violet-800 border-violet-800 inline-block mb-2"></div>
