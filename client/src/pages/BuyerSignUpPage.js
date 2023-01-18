@@ -276,11 +276,10 @@ const BuyerSignUpPage = () => {
             </div>
           </div>
         </div>
-        {/*SignIn Section */}
         <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
-          <div className="border-2 w-10 bg-white inline-block mb-2"></div>
+        
         </div>
-        {/*SignUp Section */}
+      
       </div>
     </main>
   );
