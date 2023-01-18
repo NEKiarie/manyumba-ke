@@ -64,7 +64,7 @@ const SellerPropertyDetails = () => {
       notes: "Very good properties with ample size",
       fore_closure: false,
       seller_id: user.id,
-      description: "Some text here or something describing the property",
+      description: formData.description
     };
 
     axios
@@ -261,11 +261,15 @@ const SellerPropertyDetails = () => {
                 Add Your Property Description
               </label>
               <textarea
-                id="message"
+               type="text"
+               name="description"
+               onChange={handleChange}
+
                 rows="4"
                 class="block p-2.5 w-full text-l outline-none text-gray-900 mb-4 bg-gray-50 
                 rounded-lg border border-gray-400 dark:bg-gray-700
-                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
+                  dark:focus:border-blue-500"
                 placeholder="Write your Property Description here..."
               ></textarea>
 
