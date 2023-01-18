@@ -57,19 +57,10 @@ const SellerSignUpPage = () => {
                   className="bg-white outline-none text-sm flex-1"
                 />
               </div>
-              <div className="bg-white w-64 p-2 flex items-center mb-2">
-                <MdLockOutline className="text-gray-800 m-2" />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Confirm your Password"
-                  className="bg-white outline-none text-sm flex-1"
-                />
-              </div>
               <button
                 
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
-                 hover:bg-violet-800 hover:text-white mb-2"
+                 hover:bg-violet-800 hover:text-white mb-4"
               >
                 Create Your Account
               </button>
@@ -80,17 +71,8 @@ const SellerSignUpPage = () => {
         </div>
         {/*SignIn Section */}
         <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px]  py-36 px-12">
-          <h2 className="text-3xl font-bold mb-2">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold mb-2">Discover more Suitable property near you!</h2>
           <div className="border-2 w-10 bg-white inline-block mb-2"></div>
-          <p className="mb-10">
-            Find out more about property.
-          </p>
-          <a
-            href="/seller/signup"
-            className="border-2 border-white rounded-full mb-4 px-12 py-2 inline-block font-semibold hover:bg-white hover:text-violet-800"
-          >
-            Get Started
-          </a>
         </div>
         {/*SignUp Section */}
       </div>

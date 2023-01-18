@@ -1,6 +1,6 @@
 import React from "react";
 
-import BannerImage from "../assets/img/house11lg.png";
+import BannerImage from "../assets/img/Banner.jpg";
 
 import Search from "../components/Search";
 

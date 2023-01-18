@@ -69,7 +69,7 @@ const House = ({ property }) => {
           <div className="text-[20px]">
             <BiArea />
           </div>
-          <div>{size}</div>
+          <div>{size} sq ft</div>
         </div>
       </div>
       <div className="text-lg font-semibold text-violet-600 mb-4 ">Ksh {price}</div>
