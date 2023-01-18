@@ -6,8 +6,6 @@ const FeaturedProperty = () => {
     <section className="mb-2">
       <div className="mx-auto">
       <div className="container mx-auto mt-20 ">
-          <h2>something</h2>
-          <p></p>
         </div>
         <HouseList />
       </div>
