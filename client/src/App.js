@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import BuyerLoginPage from "./pages/BuyerLoginPage";
 import LoginPage from "./pages/LoginPage";
 import SellerPage from "./pages/SellerPage";
+import Seller from "./pages/SellerModule"
 import SellerPropertyDetails from "./components/SellerPropertyDetails";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
@@ -25,10 +26,11 @@ const App = () => {
         <Route path="/buyer/signup" element={<BuyerSignUpPage />} />
         <Route path="/seller" element={<SellerLoginPage/>} />
         <Route path="/seller/signup" element={<SellerSignUpPage/>} /> 
+        <Route path="/dashboard/seller" element={<Seller/>} /> 
         <Route element = {< ProtectedRoute /> }>
           <Route path="/seller/page/2" element={<SellerPropertyDetails/>} />
           <Route path="/home" element={<Home />} />
-          <Route path="/property/:id" element={<PropertyDetails />} />
+          <Route path="/property/:type/:id" element={<PropertyDetails />} />
         </Route>
       </Routes>
     </div>

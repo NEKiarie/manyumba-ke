@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_145544) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_103619) do
   create_table "buyers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -22,6 +22,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_145544) do
   create_table "faqs", force: :cascade do |t|
     t.string "question"
     t.string "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "listed_properties", force: :cascade do |t|
+    t.integer "property_id"
+    t.integer "seller_id"
+    t.boolean "is_sold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_145544) do
     t.string "size"
     t.string "image_url"
     t.string "notes"
-    t.boolean "fore_closure"
+    t.boolean "for_sale"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price"

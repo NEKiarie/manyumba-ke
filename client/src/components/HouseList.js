@@ -11,10 +11,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-
-//import context
-import { HouseContext } from "./HouseContext";
-
 //import components
 import House from "./House";
 
@@ -24,23 +20,25 @@ import { Link } from "react-router-dom";
 //import icons
 import { ImSpinner2 } from "react-icons/im";
 
-const HouseList = () => {
-  const { loading, properties } = useContext(HouseContext);
+const HouseList = (props) => {
+  const{ properties, loading, belongsTo, meta } = props
+  // console.log("houseList")
+  // console.log(meta)
+  // console.log(properties)
 
-  // //if loading true
-  if (loading.properties && loading.types && loading.locations) {
-    return (
-      <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />
-    );
-  }
+  //debugger;
   if (properties.length < 1) {
     return (
       <div className="text-center text-3xl text-gray-400 mt-48">
         {" "}
-        Sorry, nothing found
+        Sorry, no Properties to display
       </div>
     );
   }
+  
+
+  // //if loading true
+
 
   return (
     <section className="mb-20">
@@ -63,7 +61,7 @@ const HouseList = () => {
       >
         
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-14">
-            {properties.slice(1).map((property, index) => (
+            {properties.map((property, index) => (
               <SwiperSlide key={index}>
                 <motion.div
                   whileInView={{ opacity: 1 }}
@@ -71,8 +69,8 @@ const HouseList = () => {
                   transition={{ duration: 0.5, type: "tween" }}
                   key={index}
                 >
-                  <Link to={`/property/${property.id}`} key={property.id}>
-                    <House property={property} />
+                  <Link to={`/property/${belongsTo}/${property.id}`} key={property.id} >
+                    <House property={property}  />
                   </Link>
                 </motion.div>
               </SwiperSlide>

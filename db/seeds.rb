@@ -276,7 +276,7 @@ image_url = [
         location_id: location.id,         
         beds: (1..5).to_a.sample, 
         baths: (1..4).to_a.sample,     
-        fore_closure: false,
+        for_sale: false,
         price:(1500000...5000000).to_a.sample,
         seller_id: sellers.sample.id,
         description: Faker::Lorem.paragraph,

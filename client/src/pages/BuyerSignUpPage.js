@@ -1,8 +1,64 @@
-import React from "react";
-import { FaUserAlt, FaUserCircle } from "react-icons/fa";
-import { MdLockOutline, MdOutlineRadioButtonChecked } from "react-icons/md";
+import React, {useState, useContext} from "react";
+import { ImSpinner2 } from "react-icons/im";
+import { FaUserAlt, FaUserCircle, FaMobileAlt} from "react-icons/fa";
+import { MdLockOutline, MdEmail, MdOutlineLocationOn } from "react-icons/md";
+import { HouseContext } from "../components/HouseContext";
+import { nameCheck, usernameCheck, emailAddressCheck, phoneNumberCheck, passwordCheck, passedAllChecks } from "../utils/validators";
+
 
 const BuyerSignUpPage = () => {
+  const { locations, loading, handleChange, formSignUpData, setFormSignUpData } = useContext(HouseContext) 
+  const [errors, setErrors] = useState({
+    firstName: [],
+    lastName: [],
+    userName: [],
+    emailAddress: [],
+    phoneNumber: [],
+    password: [],
+    confirmPassword: []
+  })
+  
+  //if data is not ready show a spinner
+  if(loading.locations) return <ImSpinner2 className="mx-auto animate-spin text-violet-700 text-4xl mt-[200px]" />;
+
+  //loop thru data options
+  const dataListOptions = locations.slice(1).map(location => { 
+    return (
+      <option key= {location.id} value={location.id} >
+        {`${location.name}, ${location.county}`}
+      </option>
+    )
+  })
+
+  //handle Submit
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const firstNameErrors = nameCheck(formSignUpData.first_name)
+    const lastNameErrors = nameCheck(formSignUpData.last_name)
+    const userNameErrors = usernameCheck(formSignUpData.user_name)
+    const emailErrors = emailAddressCheck(formSignUpData.email_address)
+    const phoneAddress = phoneNumberCheck(formSignUpData.phone_number)
+    const {password, confirmPassword} = passwordCheck(formSignUpData.password, formSignUpData.confirm_password)
+    if(!passedAllChecks){
+      setErrors({
+        firstName: firstNameErrors,
+        lastName: lastNameErrors,
+        userName: userNameErrors,
+        emailAddress: emailErrors,
+        phoneNumber: phoneAddress,
+        password: password,
+        confirmPassword: confirmPassword
+      })
+    }
+    console.log("sendingall data")
+
+
+  }
+
+  const generateLis = (arr) => {
+    return arr.map((error, index) => <li key={index}>{error}</li>)
+  }
+
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-39 text-center">
       <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
@@ -21,54 +77,147 @@ const BuyerSignUpPage = () => {
             </div>
             <p className="text-gray-400">Create an Account</p>
             <div className="flex flex-col items-center">
+
+              {/* div for firstname */}
+              <div className="flex flex-col items-center mb-2">     
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 my-2" htmlFor="inline-full-name">
+                  First Name
+                </label>         
+                <div className="bg-white w-64 px-2 flex items-center">
+                  <FaUserAlt className="text-gray-800 m-2" />
+                  <input
+                    type="text"
+                    name="first_name"
+                    placeholder="Enter your First name"
+                    className="bg-gray-100 outline-none text-sm flex-1"
+                    onChange ={(event) => handleChange(event, setFormSignUpData)}
+                  />                
+                </div>                
+                {Boolean(errors.firstName.length) && <ul class="text-red-500 text-sm bold">{generateLis(errors.firstName)}</ul>}
+                
+              </div>
+              
+              
+
+              {/* div for lastname */}
+              <div className="flex flex-col items-center mb-2">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 my-2" htmlFor="inline-full-name">
+                  Last Name
+                </label>
+                <div className="bg-white w-64 px-2 flex items-center">
+                  <FaUserAlt className="text-gray-800 m-2" />
+                  <input
+                    type="text"
+                    name="last_name"
+                    placeholder="Enter your Last name"
+                    className="bg-gray-100 outline-none text-sm flex-1"
+                    onChange ={(event) => handleChange(event, setFormSignUpData)}
+                  />
+                </div>
+                {Boolean(errors.lastName.length) && <ul class="text-red-500 text-sm bold">{generateLis(errors.lastName)}</ul>}
+              </div>
+              
+
+              {/* div for username */}
+              <div className="flex flex-col items-center mb-2">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 my-2" htmlFor="inline-full-name">
+                  User Name
+                </label>
+                <div className="bg-white w-64 px-2 flex items-center">
+                  <FaUserAlt className="text-gray-800 m-2" />
+                  <input
+                    type="text"
+                    name="user_name"
+                    placeholder="Create your Username"
+                    className="bg-gray-100 outline-none text-sm flex-1"
+                    onChange ={(event) => handleChange(event, setFormSignUpData)}
+                  />
+                </div>
+                {Boolean(errors.userName.length) && <ul class="text-red-500 text-sm bold">{generateLis(errors.userName)}</ul>}
+              </div>
+              
+
+                {/* Avatar pic */}
+              <div className="flex flex-col items-center mb-2">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 my-2" htmlFor="inline-full-name">
+                  Profile Pic
+                </label>
+                <div className="bg-white w-64 px-2 flex items-center">
+                  <FaUserAlt className="text-gray-800 m-2" />
+                  <input
+                    type="text"
+                    name="avatar_url"
+                    placeholder="Paste a link of "
+                    className="bg-white outline-none text-sm flex-1"
+                    onChange ={(event) => handleChange(event, setFormSignUpData)}
+                  />
+                  {Boolean(errors.userName.length) && <ul class="text-red-500 text-sm bold">{generateLis(errors.userName)}</ul>}
+                </div>
+              </div>
+              
+
+              {/* div for email address */}
               <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
+                <MdEmail className="text-gray-800 m-2" />
                 <input
-                  type="text"
-                  name="firstName"
-                  placeholder="Enter your First name"
+                  type="email"
+                  name="email_address"
+                  placeholder="Enter your Email Address"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange ={(event) => handleChange(event, setFormSignUpData)}
                 />
               </div>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Enter your Last name"
-                  className="bg-white outline-none text-sm flex-1"
-                />
-              </div>
-              <div className="bg-white w-64 p-2 flex items-center mb-4">
-                <FaUserAlt className="text-gray-800 m-2" />
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Create your Username"
-                  className="bg-white outline-none text-sm flex-1"
-                />
-              </div>
+
+              {/* div for phonenumber */}
               <div className="bg-white w-64 p-2 flex items-center">
-                <MdLockOutline className="text-gray-800 m-2" />
+                <FaMobileAlt className="text-gray-800 m-2" />
                 <input
-                  type="password"
-                  name="password"
-                  placeholder="Create your Password"
+                  type="text"
+                  name="phone_number"
+                  placeholder="Enter your Phone number"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange ={(event) => handleChange(event, setFormSignUpData)}
                 />
               </div>
+
+                {/* div for location */}
+              <div className="bg-white w-64 p-2 flex items-center">
+                <MdOutlineLocationOn className="text-gray-800 m-2" />
+                <input 
+                  placeholder="Enter Location"
+                  list="location" 
+                  id="location-input" 
+                  name="location" />
+                  <datalist id="location">
+                      {dataListOptions}
+                  </datalist>
+              </div>
+
               <div className="bg-white w-64 p-2 flex items-center mb-2">
                 <MdLockOutline className="text-gray-800 m-2" />
                 <input
                   type="password"
                   name="password"
+                  placeholder="Enter your Password"
+                  className="bg-white outline-none text-sm flex-1"
+                  onChange ={(event) => handleChange(event, setFormSignUpData)}
+                />
+              </div>
+
+              <div className="bg-white w-64 p-2 flex items-center mb-2">
+                <MdLockOutline className="text-gray-800 m-2" />
+                <input
+                  type="password"
+                  name="confirm_password"
                   placeholder="Confirm your Password"
                   className="bg-white outline-none text-sm flex-1"
+                  onChange ={(event) => handleChange(event, setFormSignUpData)}
                 />
               </div>
               <button
                 className="border-2 border-violet-800 text-violet-800 rounded-full px-12 py-2 inline-block font-semibold
                  hover:bg-violet-800 hover:text-white mb-2"
+                 onClick={handleSubmit}
               >
                 Create Your Account
               </button>

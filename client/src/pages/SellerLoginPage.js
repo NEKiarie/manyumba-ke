@@ -40,7 +40,7 @@ const SellerLoginPage = () => {
       })
       //redirect to home
       console.log("redirecting....")
-      navigate("/seller/page/2")
+      navigate("/dashboard/seller")
       
     })
     .catch(error => {
