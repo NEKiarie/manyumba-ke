@@ -17,12 +17,27 @@ const HouseContextProvider = ({ children }) => {
   });
   const [types, setTypes] = useState([]);
   const [properties, setProperties] = useState([]); 
+  const [sellerProperties, setSellerProperties] = useState([]);
+  const [sellerListedProperties, setListedSellerProperties] = useState([]);
   const [loading, setLoading] = useState({
     locations: true,
     properties: true,
-    types: true
+    types: true,
+    sellerProperties: true,
+    sellerListedProperties: true
   });
-
+  const [ formSignUpData, setFormSignUpData ] = useState({
+    first_name: "",
+    last_name: "",
+    user_name: "",
+    avatar_url: "",
+    email_address: "",
+    phone_number: "+254...",
+    location: "",
+    password: "",
+    confirm_password:""
+  })
+  
 
   //fetch all locations
 
@@ -82,10 +97,52 @@ const HouseContextProvider = ({ children }) => {
       })
   
     }, [])
-    // console.log("in HouseContext js")
-    // console.log(properties)
-    // console.log(locations)
-    // console.log("ending housecountext js")
+    
+    //fetch all properties for a specific seller
+    useEffect(() => {
+      if(user){
+        axios.get(`/properties/sellers/${user.id}`,{
+          "Content-Type": "application/json"
+        })      
+        .then((response) => {
+          const properties = ["Location (any)", ...response.data];
+          console.log("seller properties are: ")
+          console.log(properties)
+          setSellerProperties(properties)
+          setLoading(currentStatus => {
+            return {
+              ...currentStatus,
+              sellerProperties: false
+            }
+          })
+        })
+      }  
+  
+    }, [user])
+
+    //fetch all properties for a specific seller that are listed
+    useEffect(() => {
+      if(user){
+        axios.get(`/listedproperties/sellers/${user.id}`,{
+          "Content-Type": "application/json"
+        })      
+        .then((response) => {
+          const properties = ["Location (any)",...response.data];
+          console.log("seller properties that are marked to be sold: ")
+          console.log(properties)
+          setListedSellerProperties(properties)
+          setLoading(currentStatus => {
+            return {
+              ...currentStatus,
+              sellerListedProperties: false
+            }
+          })
+        })
+      }  
+  
+    }, [user])
+    
+
 //   const handleClick = () => {
 //     //console.log(country, property, price)
 
@@ -96,6 +153,16 @@ const HouseContextProvider = ({ children }) => {
 //     const isDefault = (str) => {
 //       return str.split(" ").includes("(any)");
 //     };
+
+const handleChange = (event, fn) => {
+  const {target} = event
+  fn(currentState => {
+    return {
+      ...currentState,
+      [target.name]: target.value
+    }
+  })
+}
 
 
 
@@ -114,10 +181,16 @@ const HouseContextProvider = ({ children }) => {
         setLoading,
         setUser,
         user,
+        handleChange,
         
         // handleClick,
         
-        locations
+        locations,
+        setFormSignUpData,
+        formSignUpData,
+        sellerProperties,
+        sellerListedProperties,
+        setListedSellerProperties
       }}
     >
       {children}

@@ -110,7 +110,7 @@ const SellerPropertyDetails = () => {
 
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 mt-3 mb-6 text-center">
-      <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-w-4xl">
+      <div className="mt-5 bg-white rounded-tl-[50px] rounded-br-[50px] shadow-2xl flex w-2/3 max-W-4xl">
         <div className="w-2/5 bg-violet-700 text-white rounded-br-[50px] rounded-tl-[50px] py-36 px-12"></div>
         <div className="w-3/5 p-5 items-center justify-center">
           <div className="text-left font-bold text-2xl mb-8">

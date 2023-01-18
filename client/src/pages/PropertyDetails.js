@@ -111,7 +111,7 @@ const PropertyDetails = () => {
                   Send Message
                 </button>
                 
-                <a href="https://www.paypal.com/ke/home" target="_blank" className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition">
+                <a href="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Ftransfer&state=%2Fhomepage%3Ffrom%3DSUM-QuickLink" target="_blank" className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition">
                   Make your Payment
                 </a>
               </div>
