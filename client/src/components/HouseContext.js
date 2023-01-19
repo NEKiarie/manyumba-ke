@@ -40,7 +40,7 @@ const HouseContextProvider = ({ children }) => {
     password: "",
     password_confirmation:""
   })
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [alertMessagge, setAlertMessagge] = useState({
     type: "",
     show: false,

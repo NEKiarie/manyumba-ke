@@ -16,7 +16,7 @@ const Home = () => {
   }
   const propertiesForSale = properties.slice(1).filter(property => property.for_sale)
   return <div className='min-h-auto bg-white'>
-    <Header />
+    {/* <Header /> */}
     <Banner />
     <FeaturedProperty
       loading={loading}
