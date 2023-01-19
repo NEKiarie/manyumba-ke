@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import wretch from "wretch";
 import { useParams } from "react-router-dom";
 import { RiMapPinLine } from "react-icons/ri";
@@ -135,20 +136,21 @@ const PropertyDetails = () => {
           </div>
           <div className={`flex-1 bg-white-100 w-full mb-8 border ${type == "seller" ? "border-gray-300" : ""} rounded-lg px-6 py-8`}>
           {
-            user.profile.role !== "Seller" &&<div className="flex items-center gap-x-4 mb-8">
+            type !== "seller" &&<div className="flex items-center gap-x-4 mb-8">
               <div className="w-20 h-20">
                 <img src={property.size} alt="" />
               </div>
               <div>
-                {/* <div>{house.agent.name}</div> */}
-                <Link to="" className="text-violet-700 text-sm">
-                  View Seller Details
-                </Link>
+              <a href="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Ftransfer&state=%2Fhomepage%3Ffrom%3DSUM-QuickLink" target="_blank" className="border border-violet-700
+                 text-violet-700 hover:border-violet-800 
+                hover:text-violet-500 rounded p-4 text-sm w-full transition">
+                  Make your Payment
+                </a>
               </div>
             </div>
           }
-            {user.profile.role !== "Seller" && <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
-              <input
+            {type !== "seller" && <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
+              {/* <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
                 placeholder="Name"
@@ -167,20 +169,16 @@ const PropertyDetails = () => {
                 className="border border-gray-300 focus:border-violet-700 outline-none resize-none rounded w-full p-4 h-36 text-sm text-gray-400"
                 placeholder="Message"
                 defaultValue="Hello I am Interested in [Modern apartment]"
-              ></textarea>
-              <div className="flex gap-4 mt-2">
-                <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition">
+              ></textarea> */}
+              {/* <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition">
                   Send Message
-                </button>
+                </button> */}
+              <div className="flex gap-4 mt-2">
                 
-                <a href="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Ftransfer&state=%2Fhomepage%3Ffrom%3DSUM-QuickLink" target="_blank" className="border border-violet-700
-                 text-violet-700 hover:border-violet-800 
-                hover:text-violet-500 rounded p-4 text-sm w-full transition">
-                  Make your Payment
-                </a>
               </div>
-            </form>}
-            {user.profile.role === "Seller" && 
+                </form>
+                }
+            {type === "seller" && 
             <div className="flex flex-col items-center space-x-2 lg:flex-row">
               <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)} disabled={property.for_sale}>
                 Enlist

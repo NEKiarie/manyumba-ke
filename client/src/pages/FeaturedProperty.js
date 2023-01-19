@@ -36,7 +36,7 @@ const FeaturedProperty = (props) => {
         }     
          {belongsTo === "seller" && <Tabs  changeCurrentTab = {changeCurrentTab}/>}   
           <div>
-            {currentTab !== "messages" && <HouseList loading={loading} properties={properties} belongsTo={"seller"} meta={currentTab}/>}
+            {currentTab !== "messages" && <HouseList loading={loading} properties={properties} belongsTo={belongsTo} meta={currentTab}/>}
             {/* {currentTab === "messages" && <Messages />} */}
           </div>              
         </div>           
