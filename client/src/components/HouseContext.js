@@ -40,6 +40,26 @@ const HouseContextProvider = ({ children }) => {
     password: "",
     confirm_password:""
   })
+  const [showModal, setShowModal] = useState(false);
+  const [alertMessagge, setAlertMessagge] = useState({
+    type: "",
+    show: false,
+    title: "",
+    body: ""
+  })
+  const [currentTab, setCurrentTab ] = useState("AddedProperties")
+  const [formData, setFormData ] = useState({
+    type: 1,
+    county: 1,
+    location: 1,
+    baths: "",
+    beds: "",
+    size: "",
+    price: "",
+    imageUrl: ""
+
+  })
+  const [errors, setErrors] = useState([])  
   
 
   //fetch all locations
@@ -162,16 +182,6 @@ const HouseContextProvider = ({ children }) => {
     }, [])
     
 
-//   const handleClick = () => {
-//     //console.log(country, property, price)
-
-//     //set loading
-//     setLoading(true);
-
-//     //create a function that checks if the string includes '(any)'
-//     const isDefault = (str) => {
-//       return str.split(" ").includes("(any)");
-//     };
 
 const handleChange = (event, fn) => {
   const {target} = event
@@ -183,9 +193,16 @@ const handleChange = (event, fn) => {
   })
 }
 
+const handleAlert = (obj) => {
+  setAlertMessagge(obj)
+}
 
-
-
+const toggleAlert = (show) => {
+  setAlertMessagge({
+    ...alertMessagge,
+    show: show
+  })
+}
   return (
     <HouseContext.Provider
       value={{
@@ -194,22 +211,39 @@ const handleChange = (event, fn) => {
         selectedType,
         setSelectedType,
         types,
+
         properties,
-        setProperties,       
+        setProperties, 
+
         loading,
         setLoading,
+
         setUser,
         user,
         handleChange,
-        
-        // handleClick,
-        
+
+        currentTab,
+        setCurrentTab,
+
         locations,
+
         setFormSignUpData,
         formSignUpData,
+
         sellerProperties,
         sellerListedProperties,
-        setListedSellerProperties
+        setSellerProperties,
+        setListedSellerProperties,
+
+        alertMessagge, 
+        setAlertMessagge,
+
+        formData,
+        setFormData,
+
+        handleAlert,
+        toggleAlert
+
       }}
     >
       {children}

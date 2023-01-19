@@ -17,11 +17,11 @@ const Tabs = (props) => {
                 <AiOutlineHome className="w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" /> Listed properties
             </div>
         </li>
-        <li className="mr-2" onClick={() => changeCurrentTab("messages") }>
+        {/* <li className="mr-2" onClick={() => changeCurrentTab("messages") }>
             <div className="inline-flex p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
                 <AiOutlineHome className="w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" /> Messages
             </div>
-        </li>        
+        </li>         */}
     </ul>
 </div>
 

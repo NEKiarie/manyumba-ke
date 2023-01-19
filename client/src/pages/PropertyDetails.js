@@ -14,7 +14,7 @@ import { HouseContext } from "../components/HouseContext";
 import { usernameCheck } from "../utils/validators";
 
 const PropertyDetails = () => {
-  const { loading, properties, user, setListedSellerProperties } = useContext(HouseContext)
+  const { loading, properties, user, setSellerProperties } = useContext(HouseContext)
   let { id, type } = useParams();
   id = Number(id)  
 
@@ -31,12 +31,12 @@ const PropertyDetails = () => {
   }
 
   const handleEnlist = (property) => {
-    wretch("/listed_properties")
-    .post({property_id: property.id, seller_id: user.id, is_sold: false})
+    wretch(`/properties/${property.id}`)
+    .patch({property_id: property.id, for_sale: true})
     .notFound(error => { console.log("notFound") })
     .unauthorized(error => { console.log("not authorised") })
     .error(418, error => { console.log("some error with 418") })
-    .res(response => setListedSellerProperties(currentList => [...currentList, response.data]))
+    .res(response => setSellerProperties(currentList => [...currentList, response.data]))
     .catch(error => {console.log(error, error.message) })
 
   }
@@ -91,7 +91,7 @@ const PropertyDetails = () => {
           </div>
           <div className={`flex-1 bg-white-100 w-full mb-8 border ${type == "seller" ? "border-gray-300" : ""} rounded-lg px-6 py-8`}>
           {
-            type !== "seller" &&<div className="flex items-center gap-x-4 mb-8">
+            user.profile.role !== "Seller" &&<div className="flex items-center gap-x-4 mb-8">
               <div className="w-20 h-20">
                 <img src={property.size} alt="" />
               </div>
@@ -103,7 +103,7 @@ const PropertyDetails = () => {
               </div>
             </div>
           }
-            {type !== "seller" && <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
+            {user.profile.role !== "Seller" && <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
               <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
@@ -136,7 +136,7 @@ const PropertyDetails = () => {
                 </a>
               </div>
             </form>}
-            {type === "seller" && 
+            {user.profile.role === "Seller" && 
             <div className="flex flex-col items-center space-x-2 lg:flex-row">
               <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)}>
                 Enlist

@@ -50,7 +50,7 @@ const House = ({property}) => {
       <div className="text-lg font-semibold text-violet-600 mb-4 ">Ksh {price}</div>
       {for_sale && 
       <div className="text-lg font-semibold text-violet-600 mb-4 ">
-        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-indigo-100 bg-indigo-700 rounded">For Sale</span>
+        <span className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-indigo-100 bg-indigo-700 rounded">For Sale</span>
       </div>
       }
     </div>

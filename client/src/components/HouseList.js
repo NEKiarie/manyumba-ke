@@ -22,9 +22,9 @@ import { ImSpinner2 } from "react-icons/im";
 
 const HouseList = (props) => {
   const{ properties, loading, belongsTo, meta } = props
-  // console.log("houseList")
+  console.log("houseList")
   // console.log(meta)
-  // console.log(properties)
+  console.log(properties)
 
   //debugger;
   if (properties.length < 1) {
