@@ -24,16 +24,16 @@ const FeaturedProperty = (props) => {
           <Modal showModal={showModal} setShowModal={setShowModal} setAlertMessagge={setAlertMessagge} handleClick={handleClick}/>
          {alertMessagge.show && <Alert title={alertMessagge.title} type={alertMessagge.type} body={alertMessagge.body} toggleAlert={toggleAlert}/> }
         {
-        belongsTo === "seller" &&
-        <div className="flex flex-row">
-          <button
-          className=" order-last bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          onClick={() => setShowModal(true)} >
-            Add a New Property
-        </button>
-        </div>  
-          }     
+          belongsTo === "seller" &&
+          <div className="flex flex-row">
+            <button
+            className=" order-last bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => setShowModal(true)} >
+              Add a New Property
+            </button>
+          </div>  
+        }     
          {belongsTo === "seller" && <Tabs  changeCurrentTab = {changeCurrentTab}/>}   
           <div>
             {currentTab !== "messages" && <HouseList loading={loading} properties={properties} belongsTo={"seller"} meta={currentTab}/>}

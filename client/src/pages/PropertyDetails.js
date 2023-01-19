@@ -14,7 +14,7 @@ import { HouseContext } from "../components/HouseContext";
 import { usernameCheck } from "../utils/validators";
 
 const PropertyDetails = () => {
-  const { loading, properties, user, setSellerProperties } = useContext(HouseContext)
+  const { loading, properties, user, setSellerProperties, setProperties, setAlertMessagge } = useContext(HouseContext)
   let { id, type } = useParams();
   id = Number(id)  
 
@@ -33,12 +33,56 @@ const PropertyDetails = () => {
   const handleEnlist = (property) => {
     wretch(`/properties/${property.id}`)
     .patch({property_id: property.id, for_sale: true})
-    .notFound(error => { console.log("notFound") })
-    .unauthorized(error => { console.log("not authorised") })
-    .error(418, error => { console.log("some error with 418") })
-    .res(response => setSellerProperties(currentList => [...currentList, response.data]))
-    .catch(error => {console.log(error, error.message) })
+    .notFound(error => { 
+      setAlertMessagge({
+        type: "failed",
+        show: true,
+        title: "Property Update",
+        body: "The property was NOT Found and therefore the Update Failed"
+      })
+     })
+    .unauthorized(error => { 
+        setAlertMessagge({
+          type: "failed",
+          show: true,
+          title: "Property Update",
+          body: "The are not Authorised to put up the property for Sale"
+        })
+     })
+    .error(418, error => {
+      setAlertMessagge({
+        type: "failed",
+        show: true,
+        title: "Property Update",
+        body: "The update failed with a 418 error message"
+      })
+     })
+    .res(response => {
+      updateProperties(response.data)
+      setAlertMessagge({
+        type: "success",
+        show: true,
+        title: "Property Update",
+        body: "The property was Enlisted successfully and is now on sale"
+      })
+    })
+    .catch(error => {
+      setAlertMessagge({
+        type: "failed",
+        show: true,
+        title: "Property Update",
+        body: "Something went wrong"
+      })
+     })
 
+  }
+
+  const updateProperties = (updatedProperty) => {
+    setProperties(currentList => {
+      return currentList.map(property => {
+        return property.id === updatedProperty.id ? updatedProperty : property
+      })
+    })
   }
   
 
@@ -138,7 +182,7 @@ const PropertyDetails = () => {
             </form>}
             {user.profile.role === "Seller" && 
             <div className="flex flex-col items-center space-x-2 lg:flex-row">
-              <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)}>
+              <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)} disabled={property.for_sale}>
                 Enlist
               </button>                
               <button className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition" onClick={(evnt) => handleDelist(property)}>
