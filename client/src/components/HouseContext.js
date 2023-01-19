@@ -38,7 +38,7 @@ const HouseContextProvider = ({ children }) => {
     phone_number: "+254...",
     location: "",
     password: "",
-    confirm_password:""
+    password_confirmation:""
   })
   const [showModal, setShowModal] = useState(true);
   const [alertMessagge, setAlertMessagge] = useState({
@@ -163,23 +163,23 @@ const HouseContextProvider = ({ children }) => {
     }, [user])
 
     //fetch all properties for sale
-    useEffect(() => {
-      axios.get("/properties/sale",{
-        "Content-Type": "application/json"
-      })      
-      .then((response) => {
-        const properties = ["Location (any)", ...response.data];
-        setSaleProperties(properties)
-        setLoading(currentStatus => {
-          return {
-            ...currentStatus,
-            saleProperties: false
-          }
-        })
-      })
+    // useEffect(() => {
+    //   axios.get("/properties/sale",{
+    //     "Content-Type": "application/json"
+    //   })      
+    //   .then((response) => {
+    //     const properties = ["Location (any)", ...response.data];
+    //     setSaleProperties(properties)
+    //     setLoading(currentStatus => {
+    //       return {
+    //         ...currentStatus,
+    //         saleProperties: false
+    //       }
+    //     })
+    //   })
       
   
-    }, [])
+    // }, [])
     
 
 

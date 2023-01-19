@@ -246,7 +246,7 @@ const BuyerSignUpPage = () => {
                 <MdLockOutline className="text-gray-800 m-2" />
                 <input
                   type="password"
-                  name="confirm_password"
+                  name="password_confirmation"
                   placeholder="Confirm your Password"
                   className="bg-white outline-none text-sm flex-1"
                   onChange ={(event) => handleChange(event, setFormSignUpData)}

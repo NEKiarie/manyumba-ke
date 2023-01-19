@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+    has_secure_password
+    
+
     validates :user_name, presence: true, uniqueness: true
     validates :first_name, presence: true   
     validates :last_name, presence: true
@@ -17,13 +20,13 @@ class User < ApplicationRecord
     #         message: "must be at least 6 characters, including lower and upper case letters and at least one number and symbol" }, 
     #     if: :password_digest_changed?
 
-    has_secure_password
+    
     
     has_many :user_properties
     #has_many :properties, 
     has_one :profile
     has_many :properties, class_name: "Property", foreign_key: "seller_id"
-    has_many :listed_properties, class_name: "ListedProperty", foreign_key: "seller_id"
+    #has_many :listed_properties, class_name: "ListedProperty", foreign_key: "seller_id"
 
     
 end
