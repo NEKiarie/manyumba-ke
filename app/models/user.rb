@@ -16,6 +16,8 @@ class User < ApplicationRecord
     #         with: PASSWORD_REQUIREMENTS, 
     #         message: "must be at least 6 characters, including lower and upper case letters and at least one number and symbol" }, 
     #     if: :password_digest_changed?
+
+    has_secure_password
     
     has_many :user_properties
     #has_many :properties, 
@@ -23,5 +25,5 @@ class User < ApplicationRecord
     has_many :properties, class_name: "Property", foreign_key: "seller_id"
     has_many :listed_properties, class_name: "ListedProperty", foreign_key: "seller_id"
 
-    has_secure_password
+    
 end

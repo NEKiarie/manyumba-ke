@@ -7,7 +7,7 @@ export function nameCheck(name){
         errors.push("Name should be more than one character long")
         passedAllChecks = false
     }
-    if(/[a-z][A-Z]/gi.test(name)){
+    if(!/[a-z][A-Z]/gi.test(name)){
         errors.push("Name should only have alphabets")
         passedAllChecks = false
     }
@@ -16,7 +16,7 @@ export function nameCheck(name){
 
 export function usernameCheck(username){
     const errors = []
-    if(name.length > 8){
+    if(username.length < 8){
         errors.push("Name should be more than 8 character long")
         passedAllChecks = false
     }
@@ -26,7 +26,7 @@ export function usernameCheck(username){
 export function emailAddressCheck(email){
     const errors = []
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm
-    if(regex.test(email)){
+    if(!regex.test(email)){
         errors.push("Please Enter a valid email address.")
         passedAllChecks = false
     }
@@ -37,14 +37,14 @@ export function emailAddressCheck(email){
     return errors
 }
 
-export function phoneNumberCheck(moblieNumber){
+export function phoneNumberCheck(mobileNumber){
     const errors = []
-    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm
-    if(regex.test(moblieNumber)){
-        errors.push("Please Enter a valid phone number starting with +254.")
+    const regex = /(\+?254|0){1}[7]{1}([0-9]{1}[0-9]{1}|[9]{1}[0-2]{1})[0-9]{6}$/gim
+    if(!regex.test(mobileNumber)){
+        errors.push("Please Enter a valid safaricom phone number.")
         passedAllChecks = false
     }
-    if(!moblieNumber.length){
+    if(!mobileNumber.length){
         errors.push("Please Enter a phone number")
         passedAllChecks = false
     }
@@ -56,8 +56,8 @@ export function passwordCheck(password, passwordConfirm){
         password: [],
         confirmPassword: []
     }
-    const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/igm
-    if(regex.test(password)){
+    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/igm
+    if(!regexPassword.test(password)){
         errors.password.push("A password should have atleast one number, symbol and capital letter")
         passedAllChecks = false
         return errors
