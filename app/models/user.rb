@@ -23,6 +23,7 @@ class User < ApplicationRecord
     #has_many :properties, 
     has_one :profile
     has_many :properties, class_name: "Property", foreign_key: "seller_id"
+    has_many :listed_properties, class_name: "ListedProperty", foreign_key: "seller_id"
 
     
 end

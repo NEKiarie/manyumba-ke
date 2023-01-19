@@ -10,7 +10,8 @@ import HomePage from "./pages/HomePage";
 import BuyerLoginPage from "./pages/BuyerLoginPage";
 import LoginPage from "./pages/LoginPage";
 import SellerPage from "./pages/SellerPage";
-import SellerPropertyDetails from "./components/SellerPropertyDetails";
+import Seller from "./pages/SellerModule"
+import AddPropertyForm from "./components/AddPropertyForm";
 import ProtectedRoute from "./utils/ProtectedRoute";
 // import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
@@ -35,11 +36,12 @@ const App = () => {
         <Route path="/buyer" element={<BuyerLoginPage/>} />
         <Route path="/buyer/signup" element={<BuyerSignUpPage />} />
         <Route path="/seller" element={<SellerLoginPage/>} />
-        <Route path="/seller/signup" element={<SellerSignUpPage/>} /> 
+        {/* <Route path="/seller/signup" element={<SellerSignUpPage/>} />          */}
         <Route element = {< ProtectedRoute /> }>
-          <Route path="/seller/page/2" element={<SellerPropertyDetails/>} />
+          <Route path="/seller/page/2" element={<AddPropertyForm/>} />
           <Route path="/home" element={<Home />} />
-          <Route path="/property/:id" element={<PropertyDetails />} />
+          <Route path="/property/:type/:id" element={<PropertyDetails />} />
+          <Route path="/dashboard/seller" element={<Seller/>} /> 
         </Route>
       </Routes>
     

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import wretch from "wretch";
 import { useParams } from "react-router-dom";
 import { RiMapPinLine } from "react-icons/ri";
 
@@ -11,11 +11,12 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 import { HouseContext } from "../components/HouseContext";
+import { usernameCheck } from "../utils/validators";
 
 const PropertyDetails = () => {
-  const { loading, properties } = useContext(HouseContext)
-  let { id } = useParams();
-  id = Number(id)
+  const { loading, properties, user, setSellerProperties } = useContext(HouseContext)
+  let { id, type } = useParams();
+  id = Number(id)  
 
   if (loading.properties) {
     return (
@@ -25,6 +26,21 @@ const PropertyDetails = () => {
 
   const property = properties.find(property => property.id === id) 
   const newLocal = "bg-green-500";
+  const handleDelist = (property) => {
+
+  }
+
+  const handleEnlist = (property) => {
+    wretch(`/properties/${property.id}`)
+    .patch({property_id: property.id, for_sale: true})
+    .notFound(error => { console.log("notFound") })
+    .unauthorized(error => { console.log("not authorised") })
+    .error(418, error => { console.log("some error with 418") })
+    .res(response => setSellerProperties(currentList => [...currentList, response.data]))
+    .catch(error => {console.log(error, error.message) })
+
+  }
+  
 
   return (
     <section className="bg-white">
@@ -73,8 +89,9 @@ const PropertyDetails = () => {
             </div>
             <div>{property.description}</div>
           </div>
-          <div className="flex-1 bg-white-100 w-full mb-8 border border-gray-300 rounded-lg px-6 py-8">
-            <div className="flex items-center gap-x-4 mb-8">
+          <div className={`flex-1 bg-white-100 w-full mb-8 border ${type == "seller" ? "border-gray-300" : ""} rounded-lg px-6 py-8`}>
+          {
+            user.profile.role !== "Seller" &&<div className="flex items-center gap-x-4 mb-8">
               <div className="w-20 h-20">
                 <img src={property.size} alt="" />
               </div>
@@ -85,7 +102,8 @@ const PropertyDetails = () => {
                 </Link>
               </div>
             </div>
-            <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
+          }
+            {user.profile.role !== "Seller" && <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
               <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
@@ -117,7 +135,18 @@ const PropertyDetails = () => {
                   Make your Payment
                 </a>
               </div>
-            </form>
+            </form>}
+            {user.profile.role === "Seller" && 
+            <div className="flex flex-col items-center space-x-2 lg:flex-row">
+              <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)}>
+                Enlist
+              </button>                
+              <button className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition" onClick={(evnt) => handleDelist(property)}>
+                Delist
+              </button>
+            </div>
+            }
+
           </div>
         </div>
       </div>

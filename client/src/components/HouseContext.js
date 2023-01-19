@@ -20,12 +20,14 @@ const HouseContextProvider = ({ children }) => {
   const [properties, setProperties] = useState([]); 
   const [sellerProperties, setSellerProperties] = useState([]);
   const [sellerListedProperties, setListedSellerProperties] = useState([]);
+  const [saleProperties, setSaleProperties] = useState([]);
   const [loading, setLoading] = useState({
     locations: true,
     properties: true,
     types: true,
     sellerProperties: true,
-    sellerListedProperties: true
+    sellerListedProperties: true,
+    saleProperties: true
   });
   const [ formSignUpData, setFormSignUpData ] = useState({
     first_name: "",
@@ -38,10 +40,29 @@ const HouseContextProvider = ({ children }) => {
     password: "",
     confirm_password:""
   })
+  const [showModal, setShowModal] = useState(false);
+  const [alertMessagge, setAlertMessagge] = useState({
+    type: "",
+    show: false,
+    title: "",
+    body: ""
+  })
+  const [currentTab, setCurrentTab ] = useState("AddedProperties")
+  const [formData, setFormData ] = useState({
+    type: 1,
+    county: 1,
+    location: 1,
+    baths: "",
+    beds: "",
+    size: "",
+    price: "",
+    imageUrl: ""
+
+  })
+  const [errors, setErrors] = useState([])  
   
 
   //fetch all locations
-
   useEffect(() => {
     const locations = axios.get("/locations",{
       "Content-Type": "application/json"
@@ -61,7 +82,6 @@ const HouseContextProvider = ({ children }) => {
 
 
     //fetch all properties
-
     useEffect(() => {
       axios.get("/properties",{
         "Content-Type": "application/json"
@@ -81,7 +101,6 @@ const HouseContextProvider = ({ children }) => {
     }, [])
 
    //Fetching types
-
     useEffect(() => {
       const locations = axios.get("/types",{
         "Content-Type": "application/json"
@@ -99,7 +118,7 @@ const HouseContextProvider = ({ children }) => {
   
     }, [])
     
-    //fetch all properties for a specific seller
+    //fetch all properties for a specific seller including marked as for sale
     useEffect(() => {
       if(user){
         axios.get(`/properties/sellers/${user.id}`,{
@@ -107,8 +126,8 @@ const HouseContextProvider = ({ children }) => {
         })      
         .then((response) => {
           const properties = ["Location (any)", ...response.data];
-          console.log("seller properties are: ")
-          console.log(properties)
+          //console.log("seller properties are: ")
+          //console.log(properties)
           setSellerProperties(properties)
           setLoading(currentStatus => {
             return {
@@ -121,16 +140,16 @@ const HouseContextProvider = ({ children }) => {
   
     }, [user])
 
-    //fetch all properties for a specific seller that are listed
+    //fetch all properties for a specific seller that are listed to be sold
     useEffect(() => {
       if(user){
-        axios.get(`/listedproperties/sellers/${user.id}`,{
+        axios.get(`/properties/listed/${user.id}`,{
           "Content-Type": "application/json"
         })      
         .then((response) => {
           const properties = ["Location (any)",...response.data];
-          console.log("seller properties that are marked to be sold: ")
-          console.log(properties)
+          //console.log("seller properties that are marked to be sold: ")
+          //console.log(properties)
           setListedSellerProperties(properties)
           setLoading(currentStatus => {
             return {
@@ -142,18 +161,27 @@ const HouseContextProvider = ({ children }) => {
       }  
   
     }, [user])
+
+    //fetch all properties for sale
+    useEffect(() => {
+      axios.get("/properties/sale",{
+        "Content-Type": "application/json"
+      })      
+      .then((response) => {
+        const properties = ["Location (any)", ...response.data];
+        setSaleProperties(properties)
+        setLoading(currentStatus => {
+          return {
+            ...currentStatus,
+            saleProperties: false
+          }
+        })
+      })
+      
+  
+    }, [])
     
 
-//   const handleClick = () => {
-//     //console.log(country, property, price)
-
-//     //set loading
-//     setLoading(true);
-
-//     //create a function that checks if the string includes '(any)'
-//     const isDefault = (str) => {
-//       return str.split(" ").includes("(any)");
-//     };
 
 const handleChange = (event, fn) => {
   const {target} = event
@@ -165,9 +193,16 @@ const handleChange = (event, fn) => {
   })
 }
 
+const handleAlert = (obj) => {
+  setAlertMessagge(obj)
+}
 
-
-
+const toggleAlert = (show) => {
+  setAlertMessagge({
+    ...alertMessagge,
+    show: show
+  })
+}
   return (
     <HouseContext.Provider
       value={{
@@ -176,22 +211,39 @@ const handleChange = (event, fn) => {
         selectedType,
         setSelectedType,
         types,
+
         properties,
-        setProperties,       
+        setProperties, 
+
         loading,
         setLoading,
+
         setUser,
         user,
         handleChange,
-        
-        // handleClick,
-        
+
+        currentTab,
+        setCurrentTab,
+
         locations,
+
         setFormSignUpData,
         formSignUpData,
+
         sellerProperties,
         sellerListedProperties,
-        setListedSellerProperties
+        setSellerProperties,
+        setListedSellerProperties,
+
+        alertMessagge, 
+        setAlertMessagge,
+
+        formData,
+        setFormData,
+
+        handleAlert,
+        toggleAlert
+
       }}
     >
       {children}

@@ -12,4 +12,5 @@ class Property < ApplicationRecord
 
     has_many :payment
     has_many :property_images
+    #has_many :listed_properties
 end
