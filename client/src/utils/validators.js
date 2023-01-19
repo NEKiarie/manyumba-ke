@@ -57,21 +57,21 @@ export function passwordCheck(password, passwordConfirm){
         confirmPassword: []
     }
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/igm
-    if(!regexPassword.test(password)){
-        errors.password.push("A password should have atleast one number, symbol and capital letter")
-        passedAllChecks = false
-        return errors
-    }
-    if(password.length < 8){
-        errors.password.push("A password should not be less than 8 characters long")
-        passedAllChecks = false
-        return errors
-    }
-    if(password !== passwordConfirm){
-        errors.password.push("The confirmation password is not the same as the password")
-        errors.confirmPassword.push("The confirmation password is not the same as the password")
-        passedAllChecks = false
-    }
+    // if(!regexPassword.test(password)){
+    //     errors.password.push("A password should have atleast one number, symbol and capital letter")
+    //     passedAllChecks = false
+    //     return errors
+    // }
+    // if(password.length < 8){
+    //     errors.password.push("A password should not be less than 8 characters long")
+    //     passedAllChecks = false
+    //     return errors
+    // }
+    // if(password !== passwordConfirm){
+    //     errors.password.push("The confirmation password is not the same as the password")
+    //     errors.confirmPassword.push("The confirmation password is not the same as the password")
+    //     passedAllChecks = false
+    // }
     
     return errors
 }
