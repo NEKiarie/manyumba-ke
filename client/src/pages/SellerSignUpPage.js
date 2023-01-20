@@ -265,7 +265,7 @@ const SellerSignUpPage = () => {
               <label className="font-semibold text-gray-800">
                 Existing User?{" "}
                 <a
-                  href="/buyer"
+                  href="/seller"
                   className="border-2 rounded-full inline-block px-9 font-semibold border-violet-800
                text-violet-800  hover:bg-violet-800 hover:text-white mt-2"
                 >

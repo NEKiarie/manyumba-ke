@@ -31,9 +31,6 @@ const Header = () => {
         {/* Buttons */}
 
         <div className="flex items-center gap-6">
-        {/* <Link className="hover:text-violet-800 transition text-[20px]" to="">
-           My profile
-          </Link> */}
           <button onClick={handleClick}
             className="bg-violet-800 hover:bg-violet-900 text-white px-8 py-3 rounded-lg transition"
           >

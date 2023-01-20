@@ -15,9 +15,16 @@ import { usernameCheck } from "../utils/validators";
 import axios from "axios";
 
 const PropertyDetails = () => {
-  const { loading, properties, user, setSellerProperties, setProperties, setAlertMessagge } = useContext(HouseContext)
+  const {
+    loading,
+    properties,
+    user,
+    setSellerProperties,
+    setProperties,
+    setAlertMessagge,
+  } = useContext(HouseContext);
   let { id, type } = useParams();
-  id = Number(id)  
+  id = Number(id);
 
   if (loading.properties) {
     return (
@@ -25,48 +32,49 @@ const PropertyDetails = () => {
     );
   }
 
-  const property = properties.find(property => property.id === id) 
+  const property = properties.find((property) => property.id === id);
   const newLocal = "bg-green-500";
-  const handleDelist = (property) => {
-
-  }
+  const handleDelist = (property) => {};
 
   const handleEnlist = (property) => {
-    const forSale = property.for_sale
-    axios.patch(`/properties/${property.id}`,{for_sale: !forSale})
-    .then(response => {
-      console.log("feedback of the update")
-      console.log(response.data)
-      updateProperties(response.data)
-      setAlertMessagge({
-        type: "success",
-        show: true,
-        title: "Property Update",
-        body: `The property was ${!forSale ? "DELISTED" :"ENLISTED"} successfully and is now on sale`
+    const forSale = property.for_sale;
+    axios
+      .patch(`/properties/${property.id}`, { for_sale: !forSale })
+      .then((response) => {
+        console.log("feedback of the update");
+        console.log(response.data);
+        updateProperties(response.data);
+        setAlertMessagge({
+          type: "success",
+          show: true,
+          title: "Property Update",
+          body: `The property was ${
+            !forSale ? "DELISTED" : "ENLISTED"
+          } successfully and is now on sale`,
+        });
       })
-    })
-    .catch(error => {
-      setAlertMessagge({
-        type: "failed",
-        show: true,
-        title: "Property Update",
-        body: `Something went wrong, ${error.message}`
-      })
-     })
-
-  }
+      .catch((error) => {
+        setAlertMessagge({
+          type: "failed",
+          show: true,
+          title: "Property Update",
+          body: `Something went wrong, ${error.message}`,
+        });
+      });
+  };
 
   const updateProperties = (updatedProperty) => {
-    setProperties(currentList => {
-      return currentList.map(property => {    
-        if(typeof property === 'object' && property !== null){
-          return property.id === updatedProperty.id ? updatedProperty : property 
-        }   
-        return property       
-      })
-    })
-  }
-  
+    setProperties((currentList) => {
+      return currentList.map((property) => {
+        if (typeof property === "object" && property !== null) {
+          return property.id === updatedProperty.id
+            ? updatedProperty
+            : property;
+        }
+        return property;
+      });
+    });
+  };
 
   return (
     <section className="bg-white">
@@ -115,23 +123,35 @@ const PropertyDetails = () => {
             </div>
             <div>{property.description}</div>
           </div>
-          <div className={`flex-1 bg-white-100 w-full mb-8 border ${type == "seller" ? "border-gray-300" : ""} rounded-lg px-6 py-8`}>
-          {
-            type !== "seller" &&<div className="flex items-center gap-x-4 mb-8">
-              <div className="w-20 h-20">
-                <img src={property.size} alt="" />
+          <div
+            className={`flex-1 bg-white-100 w-full mb-8 border ${
+              type == "seller" ? "border-gray-300" : ""
+            } rounded-lg px-6 py-8`}
+          >
+            {type !== "seller" && (
+              <div className="flex items-center gap-x-4 mb-8">
+                <div className="w-20 h-20">
+                  <img src={property.size} alt="" />
+                </div>
+                <div>
+                  <a
+                    href="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Ftransfer&state=%2Fhomepage%3Ffrom%3DSUM-QuickLink"
+                    target="_blank"
+                    className="border border-violet-700
+                 text-violet-700 hover:bg-violet-800 
+                hover:text-white rounded p-4 text-sm w-full transition"
+                  >
+                    Make your Payment
+                  </a>
+                </div>
               </div>
-              <div>
-              <a href="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Ftransfer&state=%2Fhomepage%3Ffrom%3DSUM-QuickLink" target="_blank" className="border border-violet-700
-                 text-violet-700 hover:border-violet-800 
-                hover:text-violet-500 rounded p-4 text-sm w-full transition">
-                  Make your Payment
-                </a>
-              </div>
-            </div>
-          }
-            {type !== "seller" && <form className="flex flex-col gap-y-4" onSubmit={(event) => event.preventDefault()}>
-              {/* <input
+            )}
+            {type !== "seller" && (
+              <form
+                className="flex flex-col gap-y-4"
+                onSubmit={(event) => event.preventDefault()}
+              >
+                {/* <input
                 className="border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm"
                 type="text"
                 placeholder="Name"
@@ -151,25 +171,38 @@ const PropertyDetails = () => {
                 placeholder="Message"
                 defaultValue="Hello I am Interested in [Modern apartment]"
               ></textarea> */}
-              {/* <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition">
+                {/* <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition">
                   Send Message
                 </button> */}
-              <div className="flex gap-4 mt-2">
-                
+                <div className="flex gap-4 mt-2"></div>
+              </form>
+            )}
+            {type === "seller" && (
+              <div className="flex flex-col items-center space-x-2 lg:flex-row">
+                <Link
+                  to="/dashboard/seller"
+                  className="border border-violet-700 text-violet-700  hover:bg-violet-800
+                 hover:text-white rounded-full p-4 text-sm w-full transition"
+                >
+                  Back
+                </Link>
+                <button
+                  className="bg-white hover:bg-violet-800 hover:text-white border border-violet-700
+                  rounded-full p-4 text-m w-full transition text-violet-800"
+                  onClick={(event) => handleEnlist(property)}
+                  disabled={property.for_sale}
+                >
+                  Enlist
+                </button>
+                <button
+                  className="border border-violet-700 text-violet-700 hover:bg-violet-800
+               hover:text-white rounded-full p-4 text-sm w-full transition"
+                  onClick={(event) => handleEnlist(property)}
+                >
+                  Delist
+                </button>
               </div>
-                </form>
-                }
-            {type === "seller" && 
-            <div className="flex flex-col items-center space-x-2 lg:flex-row">
-              <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)} disabled={property.for_sale}>
-                Enlist
-              </button>                
-              <button className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)}>
-                Delist
-              </button>
-            </div>
-            }
-
+            )}
           </div>
         </div>
       </div>
