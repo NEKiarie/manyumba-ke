@@ -280,8 +280,8 @@ image_url = [
         for_sale: false,
         price:(1500000...5000000).to_a.sample,
         seller_id: sellers.sample.id,
-        description: Faker::Lorem.paragraph,
-        notes: Faker::Lorem.sentence,
+        description: "Can be anything fr",
+        notes: "Kindly take note",
         size: size.sample,
         image_url: image_url.sample
         # image_url: "https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG91c2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
@@ -321,7 +321,7 @@ UserProperty.destroy_all
     user_property = UserProperty.create!(       
         property_id:properties.sample.id, 
         user_id:users.sample.id, 
-        notes:Faker::Lorem.sentence               
+        notes:"Kindly take note",             
     ) 
     
 end
