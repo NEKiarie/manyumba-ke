@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import wretch from "wretch";
 import { useParams } from "react-router-dom";
 import { RiMapPinLine } from "react-icons/ri";
 
@@ -13,6 +12,7 @@ import Header from "../components/Header";
 
 import { HouseContext } from "../components/HouseContext";
 import { usernameCheck } from "../utils/validators";
+import axios from "axios";
 
 const PropertyDetails = () => {
   const { loading, properties, user, setSellerProperties, setProperties, setAlertMessagge } = useContext(HouseContext)
@@ -32,39 +32,17 @@ const PropertyDetails = () => {
   }
 
   const handleEnlist = (property) => {
-    wretch(`/properties/${property.id}`)
-    .patch({property_id: property.id, for_sale: true})
-    .notFound(error => { 
-      setAlertMessagge({
-        type: "failed",
-        show: true,
-        title: "Property Update",
-        body: "The property was NOT Found and therefore the Update Failed"
-      })
-     })
-    .unauthorized(error => { 
-        setAlertMessagge({
-          type: "failed",
-          show: true,
-          title: "Property Update",
-          body: "The are not Authorised to put up the property for Sale"
-        })
-     })
-    .error(418, error => {
-      setAlertMessagge({
-        type: "failed",
-        show: true,
-        title: "Property Update",
-        body: "The update failed with a 418 error message"
-      })
-     })
-    .res(response => {
+    const forSale = property.for_sale
+    axios.patch(`/properties/${property.id}`,{for_sale: !forSale})
+    .then(response => {
+      console.log("feedback of the update")
+      console.log(response.data)
       updateProperties(response.data)
       setAlertMessagge({
         type: "success",
         show: true,
         title: "Property Update",
-        body: "The property was Enlisted successfully and is now on sale"
+        body: `The property was ${!forSale ? "DELISTED" :"ENLISTED"} successfully and is now on sale`
       })
     })
     .catch(error => {
@@ -72,7 +50,7 @@ const PropertyDetails = () => {
         type: "failed",
         show: true,
         title: "Property Update",
-        body: "Something went wrong"
+        body: `Something went wrong, ${error.message}`
       })
      })
 
@@ -80,8 +58,11 @@ const PropertyDetails = () => {
 
   const updateProperties = (updatedProperty) => {
     setProperties(currentList => {
-      return currentList.map(property => {
-        return property.id === updatedProperty.id ? updatedProperty : property
+      return currentList.map(property => {    
+        if(typeof property === 'object' && property !== null){
+          return property.id === updatedProperty.id ? updatedProperty : property 
+        }   
+        return property       
       })
     })
   }
@@ -183,7 +164,7 @@ const PropertyDetails = () => {
               <button className="bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)} disabled={property.for_sale}>
                 Enlist
               </button>                
-              <button className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition" onClick={(evnt) => handleDelist(property)}>
+              <button className="border border-violet-700 text-violet-700 hover:border-violet-800 hover:text-violet-500 rounded p-4 text-sm w-full transition" onClick={(event) => handleEnlist(property)}>
                 Delist
               </button>
             </div>

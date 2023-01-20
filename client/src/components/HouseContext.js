@@ -30,6 +30,7 @@ const HouseContextProvider = ({ children }) => {
     saleProperties: true
   });
   const [ formSignUpData, setFormSignUpData ] = useState({
+    role: "Seller",
     first_name: "",
     last_name: "",
     user_name: "",
