@@ -1,4 +1,4 @@
-Welcome to <%= Manyumba-ke Rails React Project %> 👋
+# Welcome to  Manyumba-ke Rails React Project 👋
 
 # Built with
 * Figma
