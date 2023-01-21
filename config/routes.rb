@@ -23,4 +23,7 @@ Rails.application.routes.draw do
  #get "/listedproperties/sellers/:sid", to: "listed_properties#owned_by"
   get "/properties/listed/:sid", to: "properties#owned_by_for_sale"
   get "/properties/sale", to: "properties#properties_all_for_sale"
+
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+
 end
